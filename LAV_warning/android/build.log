@@ -1,0 +1,19 @@
+Logfile initialized
+[INFO] logfile = /home/ciropom/titanium-lav/LAV_warning/android/build.log
+[DEBUG] /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/builder.py run-emulator android /home/ciropom/titanium-lav/LAV_warning
+[INFO] Launching Android emulator...one moment
+[DEBUG] From: /opt/android-sdk/tools/emulator
+[DEBUG] SDCard: /home/ciropom/.titanium/android2.sdcard
+[DEBUG] AVD ID: 13
+[DEBUG] AVD Skin: HVGA
+[DEBUG] SDK: /home/ciropom/titanium-lav/LAV_warning
+[INFO] Creating new Android Virtual Device (13 HVGA)
+[ERROR] Exception occured while building Android project:
+[ERROR] Traceback (most recent call last):
+[ERROR]   File "/home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/builder.py", line 1945, in <module>
+[ERROR]     s.run_emulator(avd_id, avd_skin)
+[ERROR]   File "/home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/builder.py", line 390, in run_emulator
+[ERROR]     avd_name = self.create_avd(avd_id,avd_skin)
+[ERROR]   File "/home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/builder.py", line 360, in create_avd
+[ERROR]     inifilec = open(inifile,'r').read()
+[ERROR] IOError: [Errno 2] No such file or directory: '/home/ciropom/.android/avd/titanium_13_HVGA.avd/config.ini'
