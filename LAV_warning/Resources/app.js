@@ -3,64 +3,57 @@ Titanium.UI.setBackgroundColor('#000');
 
 var lav_ui = {};
 
-// create tab group
-var tabGroup = Titanium.UI.createTabGroup();
-
-
 //
 // create base UI tab and root window
 //
-var win1 = Titanium.UI.createWindow({  
-    title:'Tab 1',
-    backgroundColor:'#fff'
-});
-var tab1 = Titanium.UI.createTab({  
-    icon:'KS_nav_views.png',
-    title:'Tab 1',
-    window:win1
+var main_win = Titanium.UI.createWindow({  
+    title:'Benvenuti!',
+    backgroundColor:'#fff',
 });
 
-var label1 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'I am Window 1',
-	font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	textAlign:'center',
-	width:'auto'
+var v_view = Titanium.UI.createView({
+    backgroundColor:'transparent',
+    top:0,
+    left:0,
+    width:'100%',
+    height:'100%',
+    layout:'vertical'
 });
 
-win1.add(label1);
-
-//
-// create controls tab and root window
-//
-var win2 = Titanium.UI.createWindow({  
-    title:'Tab 2',
-    backgroundColor:'#fff'
-});
-var tab2 = Titanium.UI.createTab({  
-    icon:'KS_nav_ui.png',
-    title:'Tab 2',
-    window:win2
+var benvenuto = Titanium.UI.createLabel({
+    color:'#999',
+    text:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV",
+    font:{fontSize:20,fontFamily:'Helvetica Neue'},
+    textAlign:'center',
+    width:'auto'
 });
 
-var label2 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'I am Window 2',
-	font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	textAlign:'center',
-	width:'auto'
+var istruzioni = Titanium.UI.createLabel({
+    color:'#999',
+    text:"Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce utilizzando i bottoni sottostanti",
+    font:{fontSize:20,fontFamily:'Helvetica Neue'},
+    textAlign:'center',
+    width:'auto'
 });
 
-win2.add(label2);
+var new_warning = Titanium.UI.createButton({
+    title: "Nuova segnalazione"
+});
 
+//come si fa` a prendere una funzione da un altro file?
+//btn_take_pic.addClickListener()
 
+v_view.add(benvenuto);
+v_view.add(istruzioni);
+v_view.add(new_warning);
 
-//
-//  add tabs
-//
-tabGroup.addTab(tab1);  
-tabGroup.addTab(tab2);  
+new_warning.addClickListener(function(){
+    //aprire new_warning
+});
 
+v_view.show();
+
+main_win.add(v_view);
 
 // open tab group
-tabGroup.open();
+main_win.open();
