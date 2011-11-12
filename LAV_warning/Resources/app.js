@@ -1,3 +1,6 @@
+Titanium.include("new_warning.js");
+
+
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#000');
 
@@ -47,13 +50,13 @@ v_view.add(benvenuto);
 v_view.add(istruzioni);
 v_view.add(new_warning);
 
-new_warning.addClickListener(function(){
-    //aprire new_warning
-});
+new_warning.addEventListener('click', 
+			     function(){
+				 neww.main_win.open();
+			     });
 
 v_view.show();
 
 main_win.add(v_view);
 
-// open tab group
 main_win.open();

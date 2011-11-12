@@ -4,10 +4,11 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.006948 seconds on emulator to get ready
+[DEBUG] waited 0.006873 seconds on emulator to get ready
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
 [INFO] Copying project resources..
+[TRACE] COPYING MODIFIED FILE: /home/ciropom/titanium-lav/LAV_warning/Resources/camera.js => /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/camera.js
 [TRACE] COPYING MODIFIED FILE: /home/ciropom/titanium-lav/LAV_warning/Resources/app.js => /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/app.js
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
@@ -48,7 +49,9 @@ Logfile initialized
 [DEBUG] from resource zip => assets/Resources/KS_nav_views.png
 [DEBUG] from resource zip => assets/Resources/app.js
 [DEBUG] from resource zip => assets/Resources/appicon.png
+[DEBUG] from resource zip => assets/Resources/camera.js
 [DEBUG] from resource zip => assets/Resources/default.png
+[DEBUG] from resource zip => assets/Resources/new_warning.js
 [DEBUG] from resource zip => assets/tiapp.xml
 [DEBUG] from resource zip => res/drawable/appicon.png
 [DEBUG] from resource zip => res/drawable/background.png
@@ -89,7 +92,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.012027 seconds on emulator to get ready
+[DEBUG] waited 0.006563 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Launching application ... LAV_warning
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.Lav_warningActivity }

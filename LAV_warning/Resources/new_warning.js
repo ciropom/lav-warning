@@ -25,9 +25,9 @@ neww.btn_get_pos = Titanium.UI.createButton({
     title: "Imposta la posizione"
 });
 //bottoni azione
-neww.top_buttons.add(btn_take_pic);
-neww.top_buttons.add(btn_get_pos);
+neww.top_buttons.add(neww.btn_take_pic);
+neww.top_buttons.add(neww.btn_get_pos);
 
-neww.main_view.add(top_buttons);
+neww.main_view.add(neww.top_buttons);
 
 neww.main_win.add(neww.main_view);
