@@ -1,16 +1,12 @@
+var gallery = require("gallery.js");
+
 // this file handles all the things related to the camera
-function show_camera(win){
+function show_camera(view, iter){
     Titanium.Media.showCamera({
 	success:function(event) {
 	    // called when media returned from the camera
 	    if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-		var imageView = Ti.UI.createImageView({
-		    width:'auto',
-		    height:'auto',
-		    backgroundColor: '#000',
-		    image:event.media
-		});
-		win.add(imageView);
+		iter = gallery.add(view, iter, event.media);
 	    } else {
 		alert("got the wrong type back ="+event.mediaType);
 	    }

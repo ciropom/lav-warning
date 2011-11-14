@@ -37,7 +37,7 @@ function add(scroll, iterator, image){
 
     // Create the thumb as a label with a background image
     _img = Ti.UI.createLabel({
-	backgroundImage: images.path,
+	backgroundImage: image,
 	width: 75,
 	height: 75,
 	left: iterator.rowPosition,

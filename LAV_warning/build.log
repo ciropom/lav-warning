@@ -4,7 +4,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.006641 seconds on emulator to get ready
+[DEBUG] waited 0.007689 seconds on emulator to get ready
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
 [INFO] Copying project resources..
@@ -44,7 +44,6 @@ Logfile initialized
 [INFO] Compiling Android Resources... This could take some time
 [DEBUG] Android classes.dex built
 [DEBUG] creating unsigned apk: /home/ciropom/titanium-lav/LAV_warning/build/android/bin/app-unsigned.apk
-[DEBUG] from resource zip => assets/Resources/#gallery.js#
 [DEBUG] from resource zip => assets/Resources/KS_nav_ui.png
 [DEBUG] from resource zip => assets/Resources/KS_nav_views.png
 [DEBUG] from resource zip => assets/Resources/app.js
@@ -93,7 +92,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.006609 seconds on emulator to get ready
+[DEBUG] waited 0.009361 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Launching application ... LAV_warning
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.Lav_warningActivity }
