@@ -8,3 +8,7 @@ X puo` essere:
 E: per vedere tutti gli errori
 TiAPI: per vedere tutti i messaggi che stampi con 
 Titanium.API.info() 
+
+es:
+adb logcat | egrep "TiAPI|(E/.*)"
+

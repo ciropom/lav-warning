@@ -31,18 +31,19 @@ neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_get_pos);
 
 //event listeners for buttons
-neww.btn_take_pic.addEventListener('click', 
-				   function(){
-				       // this should open the camera and set all the callbacks
-				       var photowin = Titanium.UI.createWindow({
-					   title:'Foto scattata',
-				       });
-				       Titanium.API.info("qwe1");
-				       show_camera(photowin, photowin.width, photowin.height);
-				       Titanium.API.info("qwe");
-				       photowin.open();
-				   });
-
+neww.btn_take_pic.addEventListener('click', function(){
+    var imageWin = Ti.UI.createWindow({
+	backgroundColor: '#000',
+	title: "Foto del maltrattamento"
+    });
+    show_camera(imageWin);
+    
+    imageWin.addEventListener('click', function(){
+	imageWin.close();
+    });
+    
+    imageWin.open();
+});
 
 neww.main_view.add(neww.top_buttons);
 
