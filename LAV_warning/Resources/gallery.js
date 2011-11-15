@@ -6,7 +6,6 @@ gallery.create = function(){
 	contentWidth: 320,
 	contentHeight: 'auto',
 	top: 0,
-	backgroundColor: '#000',
 	showVerticalScrollIndicator: true,
 	showHorizontalScrollIndicator: false
     });
@@ -39,7 +38,7 @@ gallery.add = function(scroll, iterator, image){
 
     // Create the thumb as a label with a background image
     _img = Ti.UI.createLabel({
-	backgroundImage: image,
+	backgroundImage: image.nativePath,
 	width: 75,
 	height: 75,
 	left: iterator.rowPosition,
@@ -69,7 +68,7 @@ gallery.add = function(scroll, iterator, image){
 	    width:'auto',
 	    height:'auto',
 	    backgroundColor: '#000',
-	    image: image
+	    image: image.nativePath
 	});
 
 	_imageWin.add(imageView);

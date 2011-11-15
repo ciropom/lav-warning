@@ -1,7 +1,9 @@
 Titanium.include("gallery.js");
 
+var camera = {};
+
 // this file handles all the things related to the camera
-function show_camera(view, iter){
+camera.show_camera = function(view, iter){
     Titanium.Media.showCamera({
 	success:function(event) {
 	    // called when media returned from the camera
@@ -24,7 +26,7 @@ function show_camera(view, iter){
 	    }
 	    a.show();
 	},
-	saveToPhotoGallery:false,
+	saveToPhotoGallery:true,
 	allowEditing:false,
 	mediaTypes:[Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO]
     });
