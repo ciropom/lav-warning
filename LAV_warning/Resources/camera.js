@@ -1,4 +1,4 @@
-var gallery = require("gallery.js");
+Titanium.include("gallery.js");
 
 // this file handles all the things related to the camera
 function show_camera(view, iter){

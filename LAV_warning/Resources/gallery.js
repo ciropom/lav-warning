@@ -1,4 +1,6 @@
-function create(){
+var gallery = {};
+
+gallery.create = function(){
     // Create the container for the gallery
     return Ti.UI.createScrollView({
 	contentWidth: 320,
@@ -10,7 +12,7 @@ function create(){
     });
 }
 
-function init_iterator(){
+gallery.init_iterator = function(){
     //create an iterator used to keep track
     //of the position of the next image to be added
     var iter = {};
@@ -24,7 +26,7 @@ function init_iterator(){
     return iter;
 }
 
-function add(scroll, iterator, image){
+gallery.add = function(scroll, iterator, image){
     //add the image passed, in the position pointed by iterator,
     //in the view scroll
     var _img;

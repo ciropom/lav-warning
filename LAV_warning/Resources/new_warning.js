@@ -1,5 +1,5 @@
 Titanium.include("camera.js");
-var gallery = Titanium.include("gallery.js");
+Titanium.include("gallery.js");
 
 var neww = {}
 
@@ -22,7 +22,7 @@ neww.top_buttons = Titanium.UI.createView({
 });
 
 neww.btn_take_pic = Titanium.UI.createButton({
-    title: "Scatta delle foto"
+    title: "Scatta una foto"
 });
 neww.btn_get_pos = Titanium.UI.createButton({
     title: "Imposta la posizione"
@@ -39,12 +39,6 @@ neww.btn_take_pic.addEventListener('click', function(){
     //passed by reference, so the next time giter is the new one
     //because show_camera calls gallery.add() which updates the object
     show_camera(neww.gview, neww.giter);
-    
-    imageWin.addEventListener('click', function(){
-	imageWin.close();
-    });
-    
-    imageWin.open();
 });
 
 neww.main_view.add(neww.top_buttons);
