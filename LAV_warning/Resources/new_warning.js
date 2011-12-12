@@ -47,43 +47,27 @@ neww.btn_take_pic.addEventListener('click', function(){
     camera.show_camera(neww.gview, neww.giter);
 });
 
-neww.btn_get_pos = Titanium.UI.addEventListener('click', function(){
+neww.btn_get_pos.addEventListener('click', function(){
     Ti.API.info("posizione premuto!");
 
-    gps.get_position() //start searching
-
-    var wait_dialog = Titanium.UI.AlertDialog({
-	'title': "Impostazione automatica della posizione tramite GPS",
-	'message': "Sto` aspettando una posizione valida..",
-	'buttonNames': ['Indietro'],
-	'cancel': 0
-    });
-    wait_dialog.show();
+    gps.get_position(); //start searching
 
     Ti.App.addEventListener('app:getCoords', function(e){
 	Ti.API.info("creazione alert dialog");
-	wait_dialog.hide();
-
+	
 	if( e.success ){
 	    var address = e.places[0].address
 	    var city = e.places[0].city
 
-	    var info = Titanium.UI.AlertDialog({
-		'title': "Impostazione automatica della posizione tramite GPS",
-		'message': address + " " + city,
-		'buttonNames': ['Indietro', 'Conferma', 'Manuale'],
-		'cancel': 0
-	    });
+	    Ti.API.info(e);
 	} else {
-	    var info = Titanium.UI.AlertDialog({
-		'title': "Impostazione automatica della posizione tramite GPS",
-		'message': "Impostazione automatica fallita, procedere inserendo manualmente la posizione",
-		'buttonNames': ['Indietro', 'Manuale'],
-		'cancel': 0
+	    var info = Ti.UI.createNotification({
+		duration: 2000,
+		message: "Impostazione automatica fallita, procedere inserendo manualmente la posizione",
 	    });
+	    info.show();
 	}
 	
-	info.show();
     });
 
     

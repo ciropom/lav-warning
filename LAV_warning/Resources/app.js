@@ -1,7 +1,7 @@
 Titanium.include("new_warning.js");
 
 
-// this sets the background color of the master UIView (when there are no windows/tab groups on it)
+// this sets the background color of the master UIView
 Titanium.UI.setBackgroundColor('#000');
 
 var lav_ui = {};
