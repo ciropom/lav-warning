@@ -37,6 +37,7 @@ gallery.add = function(scroll, iterator, image){
     }
 
     // Create the thumb as a label with a background image
+    Ti.API.info(image.nativePath);
     _img = Ti.UI.createLabel({
 	backgroundImage: image.nativePath,
 	width: 75,
