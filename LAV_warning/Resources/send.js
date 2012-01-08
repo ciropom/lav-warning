@@ -1,4 +1,5 @@
 Titanium.include("gallery.js");
+Titanium.include("new_warning.js");
 
 var send = {};
 
@@ -19,7 +20,13 @@ send.showSendView = function(image_iter){
 
     email.subject = "Segnalazione maltrattamento";
     email.toRecipients = ['lav.trentino@lav.it'];
-    email.messageBody = 'Per favore aggiungi qui sotto informazioni utili sul maltrattamento:';
+    
+    var txt = "Posizione GPS del maltrattamento (latitudine:";
+    txt += neww.position.latitude;
+    txt += ", longitudine:"+neww.position.longitude;
+    txt += ") Per favore inserisci ulteriori informazioni utili qui sotto: ";
+
+    email.messageBody = txt;
 
     //add attachments
     images = gallery.getImagePaths(image_iter);
@@ -38,11 +45,18 @@ send.showSendView = function(image_iter){
 };
 
 send.messageSendCompleted = function(e){
+    //the user can replace this function to manipulate the response actions
     var information = "";
     var title = "";
     if( e.result == send.emaildialog.SENT ){
-	title = "Fatto!";
-	information = "La segnalazione è stata inviata correttamente";
+	if( e.success ){
+	    title = "Fatto!";
+	    information = "La segnalazione è stata inviata correttamente";
+	}
+	else{
+	    title = "Attenzione!";
+	    information = "La segnalazione non è stata inviata. Controllare l'app selezionata per ulteriori dettagli.";
+	}
     }
     else if(e.result == send.emaildialog.SAVED){
 	title = "Fatto!";
@@ -54,11 +68,11 @@ send.messageSendCompleted = function(e){
     }
     else if(e.result == send.emaildialog.FAILED){
 	title = "Errore!";
-	information = "Invio della segnalazione fallito. Controllare se la connessione a internet è presente e attiva.";
+	information = e.error;
     }
 
     Ti.UI.createAlertDialog({
-	title:'Error',
+	title:title,
 	message:information,
     }).show();
 }

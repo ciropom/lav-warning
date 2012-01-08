@@ -27,13 +27,13 @@ gps.handleLocation = function(e) {
     }
 };
 gps.addHandler = function() {
-    if (!locationAdded) {
+    if (!gps.locationAdded) {
 	Ti.Geolocation.addEventListener('location', gps.handleLocation);
 	gps.locationAdded = true;
     }
 };
 gps.removeHandler = function() {
-    if (locationAdded) {
+    if (gps.locationAdded) {
 	Ti.Geolocation.removeEventListener('location', gps.handleLocation);
 	gps.locationAdded = false;
     }

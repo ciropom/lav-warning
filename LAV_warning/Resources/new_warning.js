@@ -3,7 +3,9 @@ Titanium.include("gallery.js");
 Titanium.include("gps.js");
 Titanium.include("send.js");
 
-var neww = {}
+var neww = {};
+
+neww.position = {};
 
 neww.main_win = Titanium.UI.createWindow({  
     title:'Creazione di una nuova segnalazione',
@@ -57,10 +59,11 @@ neww.btn_get_pos.addEventListener('click', function(){
 	Ti.API.info("creazione alert dialog");
 	
 	if( e.success ){
-	    var address = e.places[0].address
-	    var city = e.places[0].city
-
 	    Ti.API.info(e);
+	    neww.position.latitude = e.latitude;
+	    neww.position.longitude = e.longitude;
+	    gps.street_from_position(neww.position, 
+				     neww.onStreetFound);
 	} else {
 	    var info = Ti.UI.createNotification({
 		duration: 2000,
@@ -73,6 +76,18 @@ neww.btn_get_pos.addEventListener('click', function(){
 
     
 });
+
+neww.onStreetFound = function(e){
+    //callback of reversegeocoder
+    //it will be called when the "human readable positions"
+    //are found
+    Ti.UI.createAlertDialog({
+	title:"Reverse geocoding success!",
+	message: e,
+    }).show();
+
+    
+}
 
 neww.btn_send.addEventListener('click', function(){
     send.showSendView(neww.giter);

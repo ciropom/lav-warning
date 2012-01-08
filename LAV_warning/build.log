@@ -5,7 +5,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 2 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 5.010098 seconds on emulator to get ready
+[DEBUG] waited 5.010932 seconds on emulator to get ready
 [INFO] Waiting for the Android Emulator to become available
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
@@ -45,61 +45,3 @@ Logfile initialized
 [DEBUG] Building Java Sources: "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/Lav_warningApplication.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/Lav_warningActivity.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/R.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/Lav_warningAppInfo.java"
 [INFO] Waiting for SDCard to become available..
 [INFO] Compiling Android Resources... This could take some time
-[DEBUG] Android classes.dex built
-[DEBUG] creating unsigned apk: /home/ciropom/titanium-lav/LAV_warning/build/android/bin/app-unsigned.apk
-[DEBUG] from resource zip => assets/Resources/KS_nav_ui.png
-[DEBUG] from resource zip => assets/Resources/KS_nav_views.png
-[DEBUG] from resource zip => assets/Resources/app.js
-[DEBUG] from resource zip => assets/Resources/appicon.png
-[DEBUG] from resource zip => assets/Resources/camera.js
-[DEBUG] from resource zip => assets/Resources/default.png
-[DEBUG] from resource zip => assets/Resources/gallery.js
-[DEBUG] from resource zip => assets/Resources/gps.js
-[DEBUG] from resource zip => assets/Resources/new_warning.js
-[DEBUG] from resource zip => assets/Resources/send.js
-[DEBUG] from resource zip => assets/tiapp.xml
-[DEBUG] from resource zip => res/drawable/appicon.png
-[DEBUG] from resource zip => res/drawable/background.png
-[DEBUG] from resource zip => res/layout/titanium_tabgroup.xml
-[DEBUG] from resource zip => AndroidManifest.xml
-[DEBUG] from resource zip => resources.arsc
-[DEBUG] from resource zip => res/drawable-long-land-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-long-land-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-long-port-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-long-port-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-land-mdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-hdpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-ldpi/background.png
-[DEBUG] from resource zip => res/drawable-notlong-port-mdpi/background.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/apache/Commons-NOTICE.txt
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/apache/HttpComponents-NOTICE.txt
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/apache/mime4j-NOTICE.txt
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/build.properties
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/background.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_18.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_check_buttonless_on_48.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_18.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_more_48.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_normal.9.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_pressed.9.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/btn_picker_selected.9.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/default_icon.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/titanium.jar => org/appcelerator/titanium/res/drawable/photoDefault.png
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.js
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/binding.min.js
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/modules/titanium-ui.jar => ti/modules/titanium/ui/widget/webview/json2.js
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/smalljs.jar => org/mozilla/javascript/resources/Messages.properties
-[DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
-[DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 2 devices/emulators
-[DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.007974 seconds on emulator to get ready
-[INFO] Installing application on device
-[INFO] Launching application ... LAV_warning
-[TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.Lav_warningActivity }
-
-[INFO] Deployed LAV_warning ... Application should be running.
