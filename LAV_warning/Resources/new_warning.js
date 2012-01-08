@@ -1,6 +1,7 @@
 Titanium.include("camera.js");
 Titanium.include("gallery.js");
 Titanium.include("gps.js");
+Titanium.include("send.js");
 
 var neww = {}
 
@@ -28,14 +29,14 @@ neww.btn_take_pic = Titanium.UI.createButton({
 neww.btn_get_pos = Titanium.UI.createButton({
     title: "Posizione"
 });
-neww.btn_comment = Titanium.UI.createButton({
-    title: "Commento"
+neww.btn_send = Titanium.UI.createButton({
+    title: "Invia segnalazione"
 });
 
 //action buttons
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_get_pos);
-neww.top_buttons.add(neww.btn_comment);
+neww.top_buttons.add(neww.btn_send);
 
 neww.gview = gallery.create();
 neww.giter = gallery.init_iterator();
@@ -73,11 +74,12 @@ neww.btn_get_pos.addEventListener('click', function(){
     
 });
 
-neww.btn_comment = Titanium.UI.addEventListener('click', function(){
-    //open an activity which alows user to fill in a comment
+neww.btn_send.addEventListener('click', function(){
+    send.showSendView(neww.giter);
 });
 
 neww.main_view.add(neww.top_buttons);
 neww.main_view.add(neww.gview);
-
+// it will be opened by the app.js file
+// when the "onclick" event fires on the "new warning" button
 neww.main_win.add(neww.main_view);

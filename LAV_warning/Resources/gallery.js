@@ -2,19 +2,32 @@ var gallery = {};
 
 gallery.create = function(){
     // Create the container for the gallery
-    return Ti.UI.createScrollView({
-	contentWidth: 320,
-	contentHeight: 'auto',
-	top: 0,
-	showVerticalScrollIndicator: true,
-	showHorizontalScrollIndicator: false
+    return Ti.UI.createView({
+	backgroundColor:'transparent',
+	top:0,
+	left:0,
+	width:'100%',
+	height:'100%',
     });
+    
+    // return Ti.UI.createScrollView({
+    // 	contentWidth: 320,
+    // 	contentHeight: 'auto',
+    // 	top: 0,
+    // 	showVerticalScrollIndicator: true,
+    // 	showHorizontalScrollIndicator: false
+    // });
 }
 
 gallery.init_iterator = function(){
     //create an iterator used to keep track
     //of the position of the next image to be added
     var iter = {};
+
+    iter.data = {};
+    iter.data.index = 0;
+    iter.data.paths = [];
+    
     iter.rows = 0;
     iter.columns = 0;
     iter.thumbPadding = 5;
@@ -88,7 +101,22 @@ gallery.add = function(scroll, iterator, image){
     iterator.columns += 1;
     iterator.rows += 1;
     iterator.rowPosition += 75 + iterator.padding;
+    
+    //save data
+    iterator.data.paths[iterator.data.index] = image.nativePath;
+    iterator.data.index += 1;
 
     //return the iterator to the next position
     return iterator;
+}
+
+gallery.getImagePaths = function(iterator){
+    //this function extracts from an iterator all the 
+    //images that the gallery has inside
+    //in the insertion order
+    //it returns a dictionary
+    //- index: the total number of items
+    //- paths: an array of nativePath (one for each picture)
+
+    return iterator.data;
 }
