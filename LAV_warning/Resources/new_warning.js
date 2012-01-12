@@ -21,6 +21,22 @@ neww.main_view = Titanium.UI.createView({
     layout:'vertical'
 });
 
+var benvenuto = Titanium.UI.createLabel({
+    color:'#999',
+    text:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV",
+    font:{fontSize:20,fontFamily:'Helvetica Neue'},
+    textAlign:'center',
+    width:'480'
+});
+
+var istruzioni = Titanium.UI.createLabel({
+    color:'#999',
+    text:"Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce utilizzando i bottoni sottostanti",
+    font:{fontSize:20,fontFamily:'Helvetica Neue'},
+    textAlign:'center',
+    width:'480'
+});
+
 neww.top_buttons = Titanium.UI.createView({
     layout:'horizontal'
 });
@@ -90,11 +106,19 @@ neww.onStreetFound = function(e){
 }
 
 neww.btn_send.addEventListener('click', function(){
-    send.showSendView(neww.giter);
+    send.showSendView(neww.giter, neww.position);
 });
+
+//description
+neww.main_view.add(benvenuto);
+neww.main_view.add(istruzioni);
 
 neww.main_view.add(neww.top_buttons);
 neww.main_view.add(neww.gview);
 // it will be opened by the app.js file
 // when the "onclick" event fires on the "new warning" button
 neww.main_win.add(neww.main_view);
+
+//open the interface
+neww.main_view.show();
+neww.main_win.open();

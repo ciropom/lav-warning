@@ -5,12 +5,11 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 2 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 5.010932 seconds on emulator to get ready
+[DEBUG] waited 5.012248 seconds on emulator to get ready
 [INFO] Waiting for the Android Emulator to become available
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
 [INFO] Copying project resources..
-[TRACE] COPYING MODIFIED FILE: /home/ciropom/titanium-lav/LAV_warning/Resources/send.js => /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/send.js
 [TRACE] COPYING MODIFIED FILE: /home/ciropom/titanium-lav/LAV_warning/Resources/new_warning.js => /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/new_warning.js
 [TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables

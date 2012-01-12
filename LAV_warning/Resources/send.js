@@ -1,9 +1,8 @@
 Titanium.include("gallery.js");
-Titanium.include("new_warning.js");
 
 var send = {};
 
-send.showSendView = function(image_iter){
+send.showSendView = function(image_iter, position){
     //show the send view
     
     //creates a comment view fully functional with all the callbacks 
@@ -12,7 +11,7 @@ send.showSendView = function(image_iter){
     
     if (!email.isSupported()) {
 	Ti.UI.createAlertDialog({
-	    title:'Error',
+	    title:'Errore',
 	    message:"Email non disponibile, installare un app in grado di inviare email"
 	}).show();
 	return;
@@ -22,8 +21,8 @@ send.showSendView = function(image_iter){
     email.toRecipients = ['lav.trentino@lav.it'];
     
     var txt = "Posizione GPS del maltrattamento (latitudine:";
-    txt += neww.position.latitude;
-    txt += ", longitudine:"+neww.position.longitude;
+    txt += position.latitude;
+    txt += ", longitudine:"+position.longitude;
     txt += ") Per favore inserisci ulteriori informazioni utili qui sotto: ";
 
     email.messageBody = txt;
@@ -51,7 +50,7 @@ send.messageSendCompleted = function(e){
     if( e.result == send.emaildialog.SENT ){
 	if( e.success ){
 	    title = "Fatto!";
-	    information = "La segnalazione è stata inviata correttamente";
+	    information = "Email di segnalazione creata correttamente";
 	}
 	else{
 	    title = "Attenzione!";
@@ -71,7 +70,8 @@ send.messageSendCompleted = function(e){
 	information = e.error;
     }
 
-    Ti.UI.createAlertDialog({
+    Ti.UI.createNotification({
+	duration: 3000,
 	title:title,
 	message:information,
     }).show();
