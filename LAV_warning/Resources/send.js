@@ -20,10 +20,13 @@ send.showSendView = function(image_iter, position){
     email.subject = "Segnalazione maltrattamento";
     email.toRecipients = ['lav.trentino@lav.it'];
     
-    var txt = "Posizione GPS del maltrattamento (latitudine:";
-    txt += position.latitude;
-    txt += ", longitudine:"+position.longitude;
-    txt += ") Per favore inserisci ulteriori informazioni utili qui sotto: ";
+    var txt = '';
+    if(position.latitude !== undefined && position.latitude !== null){
+	txt += "Posizione GPS del maltrattamento (latitudine:";
+	txt += position.latitude;
+	txt += ", longitudine:"+position.longitude+')';
+    }
+    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese le indicazioni sulla posizione: ";
 
     email.messageBody = txt;
 

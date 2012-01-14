@@ -23,18 +23,9 @@ neww.main_view = Titanium.UI.createView({
 
 var benvenuto = Titanium.UI.createLabel({
     color:'#999',
-    text:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV",
+    text:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV. Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce utilizzando i bottoni sottostanti.",
     font:{fontSize:20,fontFamily:'Helvetica Neue'},
-    textAlign:'center',
-    width:'480'
-});
-
-var istruzioni = Titanium.UI.createLabel({
-    color:'#999',
-    text:"Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce utilizzando i bottoni sottostanti",
-    font:{fontSize:20,fontFamily:'Helvetica Neue'},
-    textAlign:'center',
-    width:'480'
+    width: '95%'
 });
 
 neww.top_buttons = Titanium.UI.createView({
@@ -80,10 +71,15 @@ neww.btn_get_pos.addEventListener('click', function(){
 	    neww.position.longitude = e.longitude;
 	    gps.street_from_position(neww.position, 
 				     neww.onStreetFound);
+	
+	    Ti.UI.createNotification({
+		duration: 2000,
+		message: "Impostazione automatica della posizione tramite GPS riuscita",
+	    });
 	} else {
 	    var info = Ti.UI.createNotification({
 		duration: 2000,
-		message: "Impostazione automatica fallita, procedere inserendo manualmente la posizione",
+		message: "Impostazione automatica della posizione tramite GPS fallita, inserire manualmente la posizione nella mail di segnalazione",
 	    });
 	    info.show();
 	}
@@ -111,7 +107,6 @@ neww.btn_send.addEventListener('click', function(){
 
 //description
 neww.main_view.add(benvenuto);
-neww.main_view.add(istruzioni);
 
 neww.main_view.add(neww.top_buttons);
 neww.main_view.add(neww.gview);

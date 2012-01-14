@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>it.lav.warning</id>
-    <name>LAV_warning</name>
+    <name>LAV Warning</name>
     <version>1.0</version>
     <publisher>Danilo Tomasoni</publisher>
-    <url>not specified</url>
+    <url>www.lav.it</url>
     <description>Un applicazione per segnalare maltrattamenti di animali alla LAV</description>
     <copyright>GPLv3</copyright>
     <icon>appicon.png</icon>
