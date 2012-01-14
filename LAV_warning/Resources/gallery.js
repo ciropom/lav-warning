@@ -2,21 +2,21 @@ var gallery = {};
 
 gallery.create = function(){
     // Create the container for the gallery
-    return Ti.UI.createView({
-	backgroundColor:'transparent',
-	top:0,
-	left:0,
-	width:'100%',
-	height:'100%',
-    });
-    
-    // return Ti.UI.createScrollView({
-    // 	contentWidth: 320,
-    // 	contentHeight: 'auto',
-    // 	top: 0,
-    // 	showVerticalScrollIndicator: true,
-    // 	showHorizontalScrollIndicator: false
+    // return Ti.UI.createView({
+    // 	backgroundColor:'transparent',
+    // 	top:0,
+    // 	left:0,
+    // 	width:'100%',
+    // 	height:'100%',
     // });
+    
+    return Ti.UI.createScrollView({
+    	contentWidth: 320,
+    	contentHeight: 'auto',
+    	top: 0,
+    	showVerticalScrollIndicator: true,
+    	showHorizontalScrollIndicator: false
+    });
 }
 
 gallery.init_iterator = function(){
