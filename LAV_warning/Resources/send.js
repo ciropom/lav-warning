@@ -24,7 +24,7 @@ send.showSendView = function(image_iter, position){
     if(position.latitude !== undefined && position.latitude !== null){
 	txt += "Posizione GPS del maltrattamento: ";
 	txt += "("+e.latitude+", "+e.longitude+") ";
-	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"position.longitude"&iwloc=A&hl=it";
+	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it";
     }
     txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: ";
 

@@ -26,7 +26,7 @@ neww.top_buttons = Titanium.UI.createView({
 });
 
 neww.btn_help = Titanium.UI.createButton({
-    title: "Aiuto"
+    title: "Istruzioni"
 });
 neww.btn_take_pic = Titanium.UI.createButton({
     title: "Foto"
@@ -102,7 +102,21 @@ neww.btn_get_pos.addEventListener('click', function(){
 });
 
 neww.btn_send.addEventListener('click', function(){
-    send.showSendView(neww.giter, neww.position);
+    
+    var no_pos = Ti.UI.createAlertDialog({
+	title:'Attenzione',
+	message:"La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!",
+	buttonNames: ['Indietro','Ok'], 
+	cancel: 0
+    });
+    
+    no_pos.addEventListener('click',function(e){
+	if( e.index == 1 )
+	    send.showSendView(neww.giter, neww.position);
+    });
+    
+    no_pos.show();
+    
 });
 
 neww.main_view.add(neww.top_buttons);
