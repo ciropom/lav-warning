@@ -5,24 +5,46 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 5.010119 seconds on emulator to get ready
+[DEBUG] waited 5.009875 seconds on emulator to get ready
 [INFO] Waiting for the Android Emulator to become available
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
 [INFO] Copying project resources..
-[INFO] Tiapp.xml unchanged, skipping class generation
+[TRACE] COPYING MODIFIED FILE: /home/ciropom/titanium-lav/LAV_warning/Resources/new_warning.js => /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/new_warning.js
+[TRACE] Generating Java Classes
 [DEBUG] Processing Android resource drawables
+[DEBUG] copying app icon: /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/appicon.png
+[DEBUG] generating theme.xml
 [DEBUG] found drawable-notlong-port-mdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-mdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-mdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-port-mdpi/background.png
 [DEBUG] found drawable-long-land-hdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-land-hdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-land-hdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-long-land-hdpi/background.png
 [DEBUG] found drawable-notlong-land-ldpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-ldpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-ldpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-land-ldpi/background.png
 [DEBUG] found drawable-long-land-ldpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-land-ldpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-land-ldpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-long-land-ldpi/background.png
 [DEBUG] found drawable-long-port-hdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-port-hdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-port-hdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-long-port-hdpi/background.png
 [DEBUG] found drawable-notlong-land-hdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-hdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-hdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-land-hdpi/background.png
 [DEBUG] found drawable-notlong-port-ldpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-ldpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-ldpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-port-ldpi/background.png
 [DEBUG] found drawable-long-port-ldpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-port-ldpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-long-port-ldpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-long-port-ldpi/background.png
 [DEBUG] found drawable-notlong-port-hdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-hdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-port-hdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-port-hdpi/background.png
 [DEBUG] found drawable-notlong-land-mdpi splash screen at /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-mdpi/default.png
+[DEBUG] copying /home/ciropom/titanium-lav/LAV_warning/Resources/android/images/res-notlong-land-mdpi/default.png splash screen to /home/ciropom/titanium-lav/LAV_warning/build/android/res/drawable-notlong-land-mdpi/background.png
+[DEBUG] found splash screen at /home/ciropom/titanium-lav/LAV_warning/build/android/bin/assets/Resources/default.png
+[TRACE] Writing out AndroidManifest.xml
+[DEBUG] adding /home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningApplication.java to javac build list
+[DEBUG] adding /home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/R.java to javac build list
+[DEBUG] adding /home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningAppInfo.java to javac build list
+[DEBUG] adding /home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningActivity.java to javac build list
+[DEBUG] Building Java Sources: "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningApplication.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/R.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningAppInfo.java" "/home/ciropom/titanium-lav/LAV_warning/build/android/gen/it/lav/warning/LavWarningActivity.java"
 [INFO] Waiting for SDCard to become available..
+[INFO] Compiling Android Resources... This could take some time
+[DEBUG] Android classes.dex built
 [DEBUG] creating unsigned apk: /home/ciropom/titanium-lav/LAV_warning/build/android/bin/app-unsigned.apk
 [DEBUG] from resource zip => assets/Resources/KS_nav_ui.png
 [DEBUG] from resource zip => assets/Resources/KS_nav_views.png
@@ -74,7 +96,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.006879 seconds on emulator to get ready
+[DEBUG] waited 0.006506 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Launching application ... LAV Warning
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.LavWarningActivity }

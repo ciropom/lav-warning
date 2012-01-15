@@ -32,7 +32,7 @@ neww.btn_take_pic = Titanium.UI.createButton({
     title: "Foto"
 });
 neww.btn_get_pos = Titanium.UI.createButton({
-    title: "Posizione"
+    title: "GPS"
 });
 neww.btn_send = Titanium.UI.createButton({
     title: "Segnala!"
@@ -103,13 +103,15 @@ neww.btn_get_pos.addEventListener('click', function(){
 
 neww.btn_send.addEventListener('click', function(){
     var message;
+    var ok = true;
     
-    if(neww.position.latitude == undefined || neww.position.latitude == null){
-	message = "La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!";
-    }
-    else if (neww.giter.index == 0){
+    if( neww.giter.index == 0 && (neww.position.latitude == undefined || neww.position.latitude == null)){
+	message = "è necessaria almeno una foto o una posizione per inviare una segnalazione di maltrattamento.";
+	ok = false;
+    } else if (neww.giter.index == 0)
 	message = "Non hai scattato alcuna foto del maltrattamento! senza foto la segnalazione sarà molto meno efficace. Procedere senza foto?"
-    }
+    else if(neww.position.latitude == undefined || neww.position.latitude == null)
+	message = "La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!";
     else {
 	// do not display anything 
 	send.showSendView(neww.giter, neww.position);
@@ -123,13 +125,14 @@ neww.btn_send.addEventListener('click', function(){
 	cancel: 0
     });
     
-    no_pos.addEventListener('click',function(e){
-	if( e.index == 1 )
-	    send.showSendView(neww.giter, neww.position);
-    });
+    if( ok )
+	no_pos.addEventListener('click',function(e){
+	    if( e.index == 1 )
+		send.showSendView(neww.giter, neww.position);
+	});
     
     no_pos.show();
-    
+
 });
 
 neww.main_view.add(neww.top_buttons);
