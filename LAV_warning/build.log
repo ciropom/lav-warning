@@ -3,9 +3,10 @@ Logfile initialized
 [DEBUG] /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/builder.py run /home/ciropom/titanium-lav/LAV_warning /opt/android-sdk/
 [INFO] Titanium SDK version: 1.7.2 (07/21/11 09:36 97c3689)
 [DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.007132 seconds on emulator to get ready
+[DEBUG] waited 5.010119 seconds on emulator to get ready
+[INFO] Waiting for the Android Emulator to become available
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
 [INFO] Copying project resources..
@@ -71,9 +72,9 @@ Logfile initialized
 [DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/smalljs.jar => org/mozilla/javascript/resources/Messages.properties
 [DEBUG] from JAR /home/ciropom/.titanium/mobilesdk/linux/1.7.2/android/smalljs.jar => org/mozilla/javascript/resources/Messages_fr.properties
 [DEBUG] Waiting for device to be ready ...
-[TRACE] adb devices returned 2 devices/emulators
+[TRACE] adb devices returned 1 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.007333 seconds on emulator to get ready
+[DEBUG] waited 0.006879 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Launching application ... LAV Warning
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.LavWarningActivity }

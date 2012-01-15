@@ -102,10 +102,23 @@ neww.btn_get_pos.addEventListener('click', function(){
 });
 
 neww.btn_send.addEventListener('click', function(){
+    var message;
     
+    if(neww.position.latitude == undefined || neww.position.latitude == null){
+	message = "La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!";
+    }
+    else if (neww.giter.index == 0){
+	message = "Non hai scattato alcuna foto del maltrattamento! senza foto la segnalazione sarà molto meno efficace. Procedere senza foto?"
+    }
+    else {
+	// do not display anything 
+	send.showSendView(neww.giter, neww.position);
+	return;
+    }
+    // display a complaint message
     var no_pos = Ti.UI.createAlertDialog({
 	title:'Attenzione',
-	message:"La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!",
+	message:message,
 	buttonNames: ['Indietro','Ok'], 
 	cancel: 0
     });
