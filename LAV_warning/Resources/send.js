@@ -22,11 +22,11 @@ send.showSendView = function(image_iter, position){
     
     var txt = '';
     if(position.latitude !== undefined && position.latitude !== null){
-	txt += "Posizione GPS del maltrattamento (latitudine:";
-	txt += position.latitude;
-	txt += ", longitudine:"+position.longitude+')';
+	txt += "Posizione GPS del maltrattamento: ";
+	txt += "("+e.latitude+", "+e.longitude+") ";
+	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"position.longitude"&iwloc=A&hl=it";
     }
-    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese le indicazioni sulla posizione: ";
+    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: ";
 
     email.messageBody = txt;
 

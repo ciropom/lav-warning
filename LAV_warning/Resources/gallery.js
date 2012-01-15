@@ -43,8 +43,8 @@ gallery.add = function(scroll, iterator, image){
     //in the view scroll
     var _img;
 
-    // Display the thumbs on 4 collumns
-    if (iterator.columns % 4 === 0 && iterator.rows !== 0) {
+    // Display the thumbs on 3 columns
+    if (iterator.columns % 3 === 0 && iterator.rows !== 0) {
 	iterator.columnPosition += 75 + iterator.thumbPadding;
 	iterator.rowPosition = iterator.rowPositionReset;
     }

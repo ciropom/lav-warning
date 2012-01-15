@@ -9,19 +9,14 @@ var gps = {};
 
 gps.locationAdded = false;
 gps.handleLocation = function(e) {
-    if (!e.error) {
+    if (e.success) {
 	Ti.API.info(e.coords);
-        Ti.App.fireEvent("app:getCoords", e);
+        Ti.App.fireEvent("app:getCoords", e.coords );
 	gps.removeHandler();
-	var wait_dialog = Titanium.UI.createNotification({
-	    duration: 2000,
-	    message: e.latitude+" "+e.longitude 
-	});
-	wait_dialog.show();
     }else{
 	var wait_dialog = Titanium.UI.createNotification({
 	    duration: 2000,
-	    message: "Errore nell'ottenimento dei dati dal GPS" 
+	    message: "Errore GPS "+e.code+": "+e.error 
 	});
 	wait_dialog.show();
     }
@@ -47,12 +42,19 @@ gps.get_position = function(){
 	}
     });
 
-    gps.addHandler();
-    var wait_dialog = Titanium.UI.createNotification({
-	duration: 2000,
-	message: "Attendere prego, ricerca di una posizione valida in corso..."
-    });
-    wait_dialog.show();
+    
+    if( Titanium.Geolocation.locationServicesEnabled ){
+	gps.addHandler();
+	Titanium.UI.createNotification({
+	    duration: 2000,
+	    message: "Attendere prego, ricerca di una posizione valida in corso..."
+	}).show();
+    }else
+	Titanium.UI.createNotification({
+	    duration: 2000,
+	    message: "GPS disabilitato. Abilitarlo e riprovare."
+	}).show();
+	
 };
 
 gps.street_from_position = function(coords, callback){

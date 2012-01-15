@@ -21,17 +21,13 @@ neww.main_view = Titanium.UI.createView({
     layout:'vertical'
 });
 
-var benvenuto = Titanium.UI.createLabel({
-    color:'#999',
-    text:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV. Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce utilizzando i bottoni sottostanti.",
-    font:{fontSize:20,fontFamily:'Helvetica Neue'},
-    width: '95%'
-});
-
 neww.top_buttons = Titanium.UI.createView({
     layout:'horizontal'
 });
 
+neww.btn_help = Titanium.UI.createButton({
+    title: "Aiuto"
+});
 neww.btn_take_pic = Titanium.UI.createButton({
     title: "Foto"
 });
@@ -39,16 +35,28 @@ neww.btn_get_pos = Titanium.UI.createButton({
     title: "Posizione"
 });
 neww.btn_send = Titanium.UI.createButton({
-    title: "Invia segnalazione"
+    title: "Segnala!"
 });
 
 //action buttons
+neww.top_buttons.add(neww.btn_help);
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_get_pos);
 neww.top_buttons.add(neww.btn_send);
 
 neww.gview = gallery.create();
 neww.giter = gallery.init_iterator();
+
+neww.btn_help.addEventListener('click', function(){
+    //create a dialog with help
+    
+    Ti.UI.createAlertDialog({
+	title:'Aiuto',
+	message:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV. Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce, e poi inviaci la segnalazione.",
+	buttonNames: ['Indietro']
+    }).show();
+    
+});
 
 //event listeners for buttons
 neww.btn_take_pic.addEventListener('click', function(){
@@ -61,52 +69,41 @@ neww.btn_get_pos.addEventListener('click', function(){
     Ti.API.info("posizione premuto!");
 
     gps.get_position(); //start searching
+    
+    var onStreetFound = function(e){
+	//callback of reversegeocoder
+	//it will be called when the "human readable positions"
+	//are found
+	Ti.UI.createAlertDialog({
+	    title:"Reverse geocoding success!",
+	    message: e,
+	}).show();
+    }
+
 
     Ti.App.addEventListener('app:getCoords', function(e){
+	//invoked when the coords are obtained
 	Ti.API.info("creazione alert dialog");
 	
-	if( e.success ){
-	    Ti.API.info(e);
-	    neww.position.latitude = e.latitude;
-	    neww.position.longitude = e.longitude;
-	    gps.street_from_position(neww.position, 
-				     neww.onStreetFound);
-	
-	    Ti.UI.createNotification({
-		duration: 2000,
-		message: "Impostazione automatica della posizione tramite GPS riuscita",
-	    });
-	} else {
-	    var info = Ti.UI.createNotification({
-		duration: 2000,
-		message: "Impostazione automatica della posizione tramite GPS fallita, inserire manualmente la posizione nella mail di segnalazione",
-	    });
-	    info.show();
-	}
+	Ti.API.info(e);
+	neww.position.latitude = e.latitude;
+	neww.position.longitude = e.longitude;
+	gps.street_from_position(e, 
+				 onStreetFound);
+	    
+	Ti.UI.createNotification({
+	    duration: 2000,
+	    message: "Impostazione automatica della posizione tramite GPS riuscita",
+	}).show();
 	
     });
 
     
 });
 
-neww.onStreetFound = function(e){
-    //callback of reversegeocoder
-    //it will be called when the "human readable positions"
-    //are found
-    Ti.UI.createAlertDialog({
-	title:"Reverse geocoding success!",
-	message: e,
-    }).show();
-
-    
-}
-
 neww.btn_send.addEventListener('click', function(){
     send.showSendView(neww.giter, neww.position);
 });
-
-//description
-neww.main_view.add(benvenuto);
 
 neww.main_view.add(neww.top_buttons);
 neww.main_view.add(neww.gview);
