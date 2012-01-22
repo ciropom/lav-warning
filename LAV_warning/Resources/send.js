@@ -37,7 +37,7 @@ send.showSendView = function(images, position){
     if(position.latitude !== undefined && position.latitude !== null){
 	txt += "Posizione stimata del maltrattamento: ";
 	txt += "("+position.latitude+", "+position.longitude+") ";
-	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it";
+	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it ";
     }
     txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: ";
 
