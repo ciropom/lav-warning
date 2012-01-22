@@ -11,9 +11,10 @@ gallery.create = function(){
     // });
     
     return Ti.UI.createScrollView({
+	left:0,right:0,
+	top:0,bottom:0,
     	contentWidth: 320,
     	contentHeight: 'auto',
-    	top: 0,
     	showVerticalScrollIndicator: true,
     	showHorizontalScrollIndicator: false
     });
@@ -81,7 +82,7 @@ gallery.add = function(scroll, iterator, image){
 	var imageView = Ti.UI.createImageView({
 	    width:'auto',
 	    height:'auto',
-	    backgroundColor: '#000',
+	    left:0,right:0,top:0,bottom:0,
 	    image: image.nativePath
 	});
 
@@ -91,7 +92,6 @@ gallery.add = function(scroll, iterator, image){
 	});
 	
 	_imageWin.open();
-
     });
 
     // Add thumb to the scrollview
