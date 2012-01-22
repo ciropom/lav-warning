@@ -10,7 +10,6 @@ var gps = {};
 gps.locationAdded = false;
 gps.handleLocation = function(e) {
     if (e.success) {
-	Ti.API.info(e.coords);
         Ti.App.fireEvent("app:getCoords", e.coords );
 	gps.removeHandler();
     }else{
@@ -36,25 +35,31 @@ gps.removeHandler = function() {
 
 gps.get_position = function(){
     //the user should register a event listener on 'app:getCoords'
+    var msg = "";
+    
     Titanium.Geolocation.getCurrentPosition(function(e) {
 	if (e.error) {
 	    return;
 	}
     });
-
     
     if( Titanium.Geolocation.locationServicesEnabled ){
-	gps.addHandler();
+	if( !gps.locationAdded ){
+	    gps.addHandler();
+	    msg = "Attendere prego, ricerca di una posizione valida in corso...";
+	} else {
+	    gps.removeHandler();
+	    msg = "Ricerca posizione GPS interrotta";
+	}
 	Titanium.UI.createNotification({
 	    duration: 2000,
-	    message: "Attendere prego, ricerca di una posizione valida in corso..."
+	    message: msg
 	}).show();
     }else
 	Titanium.UI.createNotification({
 	    duration: 2000,
 	    message: "GPS disabilitato. Abilitarlo e riprovare."
 	}).show();
-	
 };
 
 gps.street_from_position = function(coords, callback){

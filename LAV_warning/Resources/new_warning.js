@@ -5,7 +5,7 @@ Titanium.include("send.js");
 
 var neww = {};
 
-neww.position = {};
+neww.position = {'latitude':null, 'longitude':null, 'street':null};
 
 neww.main_win = Titanium.UI.createWindow({  
     title:'Creazione di una nuova segnalazione',
@@ -78,14 +78,14 @@ neww.btn_get_pos.addEventListener('click', function(){
 	    title:"Reverse geocoding success!",
 	    message: e,
 	}).show();
+	
+	if( e )
+	    neww.position.street = e[0].address;
     }
 
 
     Ti.App.addEventListener('app:getCoords', function(e){
 	//invoked when the coords are obtained
-	Ti.API.info("creazione alert dialog");
-	
-	Ti.API.info(e);
 	neww.position.latitude = e.latitude;
 	neww.position.longitude = e.longitude;
 	gps.street_from_position(e, 
@@ -104,17 +104,18 @@ neww.btn_get_pos.addEventListener('click', function(){
 neww.btn_send.addEventListener('click', function(){
     var message;
     var ok = true;
-    
-    if( neww.giter.index == 0 && (neww.position.latitude == undefined || neww.position.latitude == null)){
+    var images = gallery.getImagePaths(neww.giter);
+
+    if( images.index == 0 && (neww.position.latitude == undefined || neww.position.latitude == null)){
 	message = "è necessaria almeno una foto o una posizione per inviare una segnalazione di maltrattamento.";
 	ok = false;
-    } else if (neww.giter.index == 0)
+    } else if (images.index == 0)
 	message = "Non hai scattato alcuna foto del maltrattamento! senza foto la segnalazione sarà molto meno efficace. Procedere senza foto?"
     else if(neww.position.latitude == undefined || neww.position.latitude == null)
 	message = "La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!";
     else {
 	// do not display anything 
-	send.showSendView(neww.giter, neww.position);
+	send.showSendView(images, neww.position);
 	return;
     }
     // display a complaint message

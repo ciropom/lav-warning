@@ -2,7 +2,7 @@ Titanium.include("gallery.js");
 
 var send = {};
 
-send.showSendView = function(image_iter, position){
+send.showSendView = function(images, position){
     //show the send view
     
     //creates a comment view fully functional with all the callbacks 
@@ -22,7 +22,7 @@ send.showSendView = function(image_iter, position){
     
     var txt = '';
     if(position.latitude !== undefined && position.latitude !== null){
-	txt += "Posizione GPS del maltrattamento: ";
+	txt += "Posizione stimata del maltrattamento: ";
 	txt += "("+position.latitude+", "+position.longitude+") ";
 	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it";
     }
@@ -31,8 +31,6 @@ send.showSendView = function(image_iter, position){
     email.messageBody = txt;
 
     //add attachments
-    images = gallery.getImagePaths(image_iter);
-    
     for(var i = 0; i < images.index; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i]);
 	email.addAttachment(f);
