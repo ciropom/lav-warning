@@ -5,7 +5,7 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 2 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 5.011203 seconds on emulator to get ready
+[DEBUG] waited 5.010721 seconds on emulator to get ready
 [INFO] Waiting for the Android Emulator to become available
 [DEBUG] it.lav.warning installed? True
 [WARN] Fastdev enabled, but server isn't running, deploying normally
@@ -96,9 +96,11 @@ Logfile initialized
 [DEBUG] Waiting for device to be ready ...
 [TRACE] adb devices returned 2 devices/emulators
 [DEBUG] Device connected... (waited 0 seconds)
-[DEBUG] waited 0.007907 seconds on emulator to get ready
+[DEBUG] waited 0.007806 seconds on emulator to get ready
 [INFO] Installing application on device
 [INFO] Launching application ... LAV Warning
 [TRACE] Launch output: Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=it.lav.warning/.LavWarningActivity }
+Error type 3
+Error: Activity class {it.lav.warning/it.lav.warning.LavWarningActivity} does not exist.
 
 [INFO] Deployed LAV Warning ... Application should be running.

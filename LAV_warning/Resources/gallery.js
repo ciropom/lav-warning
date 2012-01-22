@@ -69,8 +69,6 @@ gallery.add = function(scroll, iterator, image){
     	});
 	
     	var imageView = Ti.UI.createImageView({
-    	    width:'auto',
-    	    height:'auto',
     	    left:0,right:0,top:0,bottom:0,
     	    url: image.nativePath
     	});
