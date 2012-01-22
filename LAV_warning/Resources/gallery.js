@@ -50,48 +50,37 @@ gallery.add = function(scroll, iterator, image){
 	iterator.rowPosition = iterator.rowPositionReset;
     }
 
-    // Create the thumb as a label with a background image
-    Ti.API.info(image.nativePath);
-    _img = Ti.UI.createLabel({
-	backgroundImage: image.nativePath,
+    _img = Ti.UI.createImageView({
+	url: image.nativePath,
 	width: 75,
 	height: 75,
 	left: iterator.rowPosition,
-	top: iterator.columnPosition
+	top: iterator.columnPosition,
+	id: iterator.data.index
     });
 
-    // Set the thumbs properties
-    // TODO: Properties should be sent as an option
-    _img.borderColor 				= null;
-    _img.borderWidth 				= 0;
-    _img.backgroundPaddingLeft 	        	= 0;
-    _img.backgroundPaddingRight 	        = 0;
-    _img.backgroundPaddingTop 		        = 0;
-    _img.backgroundPaddingBottom	        = 0;
-    _img.backgroundLeftCap	 		= 0;
-    _img.backgroundTopCap 			= 0;
-
+    
     // Attach click listener to each thumb
     _img.addEventListener('click', function (e) {
-	// Create a new window and show the image selected
-	_imageWin = Ti.UI.createWindow({
-	    backgroundColor: '#000',
-	    title: "Foto del maltrattamento"
-	});
+    	// Create a new window and show the image selected
+    	_imageWin = Ti.UI.createWindow({
+    	    backgroundColor: '#000',
+    	    title: "Foto numero "+iterator.data.index.toString()+" del maltrattamento"
+    	});
 	
-	var imageView = Ti.UI.createImageView({
-	    width:'auto',
-	    height:'auto',
-	    left:0,right:0,top:0,bottom:0,
-	    image: image.nativePath
-	});
+    	var imageView = Ti.UI.createImageView({
+    	    width:'auto',
+    	    height:'auto',
+    	    left:0,right:0,top:0,bottom:0,
+    	    url: image.nativePath
+    	});
 
-	_imageWin.add(imageView);
-	_imageWin.addEventListener('click', function(e){
-	    _imageWin.close();
-	});
+    	_imageWin.add(imageView);
+    	_imageWin.addEventListener('click', function(e){
+    	    _imageWin.close();
+    	});
 	
-	_imageWin.open();
+    	_imageWin.open();
     });
 
     // Add thumb to the scrollview
