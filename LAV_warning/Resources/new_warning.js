@@ -35,20 +35,25 @@ neww.main_view = Titanium.UI.createView({
 });
 
 neww.top_buttons = Titanium.UI.createView({
-    layout:'horizontal'
+    layout:'horizontal',
+    left: 10
 });
 
 neww.btn_help = Titanium.UI.createButton({
     title: "Istruzioni"
+    //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_take_pic = Titanium.UI.createButton({
     title: "Foto"
+    //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_get_pos = Titanium.UI.createButton({
     title: "GPS"
+    //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_send = Titanium.UI.createButton({
     title: "Segnala!"
+    //font: {fontFamily:'Arial', fontSize: 16}
 });
 
 //action buttons
