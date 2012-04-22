@@ -58,8 +58,8 @@ neww.btn_send = Titanium.UI.createButton({
 
 //action buttons
 neww.top_buttons.add(neww.btn_help);
-neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_get_pos);
+neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_send);
 
 neww.gview = gallery.create();
@@ -70,7 +70,7 @@ neww.btn_help.addEventListener('click', function(){
     
     Ti.UI.createAlertDialog({
 	title:'Aiuto',
-	message:"Benvenuti nell'applicazione per segnalare maltrattamenti della LAV. Scatta delle foto all'animale maltrattato e segnalaci la tua posizione in modo semplice e veloce, e poi inviaci la segnalazione.",
+	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Segnalaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.",
 	buttonNames: ['Indietro']
     }).show();
     
