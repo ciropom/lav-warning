@@ -1,2 +1,8 @@
-1. paver
+1. paver (optional)
 2. rst2
+3. openjdk6 (or jdk 6 sun)
+4. android sdk
+5. titanium mobile sdk
+6. some avd (at least one, created using $ANDROID_SDK/tools/android 
+app)
+
