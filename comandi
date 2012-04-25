@@ -1,6 +1,10 @@
 per lanciare il programma:
 paver run -d LAV_Warning/
 
+oppure (funziona meglio)
+emulator -avd android-* 
+(nome di un avd nella macchina creato tramite /opt/androidsdk/tools/android)
+
 per debug:
 adb logcag | grep X
 
