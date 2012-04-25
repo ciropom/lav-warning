@@ -70,7 +70,7 @@ neww.btn_help.addEventListener('click', function(){
     
     Ti.UI.createAlertDialog({
 	title:'Aiuto',
-	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Segnalaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.",
+	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Indicaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.",
 	buttonNames: ['Indietro']
     }).show();
     
