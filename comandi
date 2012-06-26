@@ -1,7 +1,9 @@
 per lanciare il programma:
-paver run -d LAV_Warning/
 
-oppure (funziona meglio)
+paver run -d LAV_Warning/
+titanium.py run (all'interno della cartella del progetto)
+
+per lanciare l'emulatore:
 emulator -avd android-* 
 (nome di un avd nella macchina creato tramite /opt/androidsdk/tools/android)
 
