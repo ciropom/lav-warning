@@ -22,37 +22,52 @@ neww.position = {'latitude':null, 'longitude':null, 'street':null};
 
 neww.main_win = Titanium.UI.createWindow({  
     title:'Creazione di una nuova segnalazione',
-    backgroundColor:'#fff',
+    exitOnClose: true
 });
 
 neww.main_view = Titanium.UI.createView({
-    backgroundColor:'transparent',
+    //backgroundColor:'transparent',
+    backgroundColor:'#FC9505',
     top:0,
     left:0,
-    width:'100%',
-    height:'100%',
+    width:Titanium.UI.FILL,
+    height:Titanium.UI.FILL,
     layout:'vertical'
 });
 
 neww.top_buttons = Titanium.UI.createView({
-    layout:'horizontal',
-    left: 10
+    layout:'composite',
+    height: '100',
+    width:Titanium.UI.FILL
 });
 
+
 neww.btn_help = Titanium.UI.createButton({
-    title: "Istruzioni"
+    //title: "Istruzioni",
+    backgroundImage: '/images/help.png',
+    width: 48, height: 48,
+    left: 20
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_take_pic = Titanium.UI.createButton({
-    title: "Foto"
+    backgroundImage: '/images/photo.png',
+    width: 48, height: 48,
+    //title: "Foto",
+    left: 180
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_get_pos = Titanium.UI.createButton({
-    title: "GPS"
+    backgroundImage: '/images/gps.png',
+    width: 48, height: 48,
+    //title: "GPS",
+    left: 340
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_send = Titanium.UI.createButton({
-    title: "Segnala!"
+    backgroundImage: '/images/send.png',
+    width: 48, height: 48,
+    //title: "Segnala!",
+    right: 50
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 
@@ -65,12 +80,20 @@ neww.top_buttons.add(neww.btn_send);
 neww.gview = gallery.create();
 neww.giter = gallery.init_iterator();
 
+neww.welcome = Ti.UI.createLabel({
+  text: 'Foto che verranno incluse nella segnalazione:',
+  textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+  color: '#000000',
+  font: { fontSize:24 }
+});
+
+//controllers wiring
 neww.btn_help.addEventListener('click', function(){
     //create a dialog with help
     
     Ti.UI.createAlertDialog({
 	title:'Aiuto',
-	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Indicaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.",
+	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Indicaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.\nRicorda: segnalazioni con molte foto richiedono un pò di tempo per essere inviate, quindi abbi pazienza.",
 	buttonNames: ['Indietro']
     }).show();
     
@@ -84,7 +107,6 @@ neww.btn_take_pic.addEventListener('click', function(){
 });
 
 neww.btn_get_pos.addEventListener('click', function(){
-    Ti.API.info("posizione premuto!");
 
     gps.get_position(); //start searching
     
@@ -147,19 +169,46 @@ neww.btn_send.addEventListener('click', function(){
     if( ok )
 	no_pos.addEventListener('click',function(e){
 	    if( e.index == 1 )
-		send.showSendView(neww.giter, neww.position);
+		send.showSendView(images, neww.position);
 	});
     
     no_pos.show();
 
 });
 
+//layout main panel
 neww.main_view.add(neww.top_buttons);
+neww.main_view.add(neww.welcome);
 neww.main_view.add(neww.gview);
+
+
 // it will be opened by the app.js file
 // when the "onclick" event fires on the "new warning" button
 neww.main_win.add(neww.main_view);
 
+neww.changeButtonsPosition = function(){
+    var phone_width = Titanium.Platform.displayCaps.platformWidth;
+    var button_distance = phone_width / 4;
+    neww.btn_take_pic.setLeft( button_distance ); 
+    neww.btn_get_pos.setLeft( button_distance * 2 ); 
+}
+//change the position also onload
+neww.changeButtonsPosition();
+
 //open the interface
-neww.main_view.show();
 neww.main_win.open();
+
+
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+    Ti.API.trace(Ti.Gesture.orientation);
+    neww.changeButtonsPosition();
+});
+
+neww.main_win.addEventListener('postlayout', function(e){
+    //debug
+    Ti.API.trace("win "+neww.main_win.size.width+","+neww.main_win.size.height+" ");
+    Ti.API.trace("buttons "+neww.top_buttons.size.width+","+neww.top_buttons.size.height+" ");
+    Ti.API.trace("mainview "+neww.main_view.size.width+","+neww.main_view.size.height+" ");
+    Ti.API.trace("welcome "+neww.welcome.size.width+","+neww.welcome.size.height+" ");
+    Ti.API.trace("scrollview "+neww.gview.size.width+","+neww.gview.size.height+" ");
+});

@@ -24,10 +24,12 @@ gallery.create = function(){
     // });
     
     return Ti.UI.createScrollView({
-	left:0,right:0,
-	top:0,bottom:0,
-    	contentWidth: 320,
+	contentWidth: 'auto',
     	contentHeight: 'auto',
+	width: '100%',
+	height: '100%',
+	scrollType: 'vertical',
+	backgroundColor: '#FC7E00',
     	showVerticalScrollIndicator: true,
     	showHorizontalScrollIndicator: false
     });
@@ -41,12 +43,13 @@ gallery.init_iterator = function(){
     iter.data = {};
     iter.data.index = 0;
     iter.data.paths = [];
-    
+
     iter.rows = 0;
     iter.columns = 0;
+    iter.image_size = 150;
     iter.thumbPadding = 5;
-    iter.rowPosition = 2;
-    iter.rowPositionReset = 2;
+    iter.rowPosition = 15;
+    iter.rowPositionReset = 15;
     iter.padding = 5;
     iter.columnPosition	= 15;
     return iter;
@@ -56,17 +59,17 @@ gallery.add = function(scroll, iterator, image){
     //add the image passed, in the position pointed by iterator,
     //in the view scroll
     var _img;
-
+    var width_occupied = (iterator.columns + 1) * (iterator.padding + iterator.image_size) + iterator.rowPositionReset;
     // Display the thumbs on 3 columns
-    if (iterator.columns % 3 === 0 && iterator.rows !== 0) {
-	iterator.columnPosition += 75 + iterator.thumbPadding;
+    if ( width_occupied >= scroll.size.width && iterator.rows !== 0) {
+	iterator.columnPosition += iterator.image_size + iterator.thumbPadding;
 	iterator.rowPosition = iterator.rowPositionReset;
     }
 
     _img = Ti.UI.createImageView({
-	url: image.nativePath,
-	width: 75,
-	height: 75,
+	image: image.nativePath,
+	width: iterator.image_size,
+	height: iterator.image_size,
 	left: iterator.rowPosition,
 	top: iterator.columnPosition,
 	id: iterator.data.index
@@ -82,8 +85,8 @@ gallery.add = function(scroll, iterator, image){
     	});
 	
     	var imageView = Ti.UI.createImageView({
-    	    left:0,right:0,top:0,bottom:0,
-    	    url: image.nativePath
+    	    //left:0,right:0,top:0,bottom:0,
+    	    image: image.nativePath
     	});
 
     	_imageWin.add(imageView);
@@ -100,12 +103,13 @@ gallery.add = function(scroll, iterator, image){
     // Increment pointers
     iterator.columns += 1;
     iterator.rows += 1;
-    iterator.rowPosition += 75 + iterator.padding;
+    iterator.rowPosition += iterator.image_size + iterator.padding;
     
     //save data
     iterator.data.paths[iterator.data.index] = image.nativePath;
     iterator.data.index += 1;
 
+    Ti.API.debug("immagine "+image.nativePath+" aggiunta");
     //return the iterator to the next position
     return iterator;
 }
@@ -117,6 +121,7 @@ gallery.getImagePaths = function(iterator){
     //it returns a dictionary
     //- index: the total number of items
     //- paths: an array of nativePath (one for each picture)
-
-    return iterator.data;
+    
+    //return by value (not by reference)
+    return JSON.parse( JSON.stringify( iterator.data ) );
 }

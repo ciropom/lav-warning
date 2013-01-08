@@ -35,18 +35,21 @@ send.showSendView = function(images, position){
     
     var txt = '';
     if(position.latitude !== undefined && position.latitude !== null){
-	txt += "Posizione stimata del maltrattamento: ";
-	txt += "("+position.latitude+", "+position.longitude+") ";
-	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it  ";
+	txt += "Posizione stimata del maltrattamento: \n";
+	txt += "("+position.latitude+", "+position.longitude+") \n";
+	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it\n";
     }
-    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: ";
+    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: \n";
 
     email.messageBody = txt;
 
     //add attachments
+    Ti.API.trace("images "+JSON.stringify(images)+"");
+    Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.index; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i]);
 	email.addAttachment(f);
+	Ti.API.trace("aggiungo immagine "+images.paths[i]);
     }
 
 
