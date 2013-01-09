@@ -21,7 +21,8 @@ send.showSendView = function(images, position){
     //creates a comment view fully functional with all the callbacks 
     //set. 
     var email = Titanium.UI.createEmailDialog()
-    
+    var i;
+
     if (!email.isSupported()) {
 	Ti.UI.createAlertDialog({
 	    title:'Errore',

@@ -15,23 +15,58 @@ Titanium.include("camera.js");
 Titanium.include("gallery.js");
 Titanium.include("gps.js");
 Titanium.include("send.js");
+Titanium.include("popup.js");
 
 var neww = {};
 
 neww.position = {'latitude':null, 'longitude':null, 'street':null};
+//load settings 
+neww.target_mail=Ti.App.Properties.getString('targetMail', 'lav.trentino@lav.it');
+neww.preview_dimension=Ti.App.Properties.getString('previewDimension', 150);
 
-neww.main_win = Titanium.UI.createWindow({  
+
+//specify default actions for popup save and cancel buttons
+Ti.App.addEventListener('save-click', function(e){
+    Ti.App.Properties.setString(e.propertyKey, e.txt);
+    e.win.close();
+});
+Ti.App.addEventListener('cancel-click', function(e){
+    e.win.close();
+});
+
+neww.main_win = Titanium.UI.createWindow({
     title:'Creazione di una nuova segnalazione',
     exitOnClose: true,
     navBarHidden: false,
     activity : {
         onCreateOptionsMenu : function(e) {
             var menu = e.menu;
-            var menuItem = menu.add({ title : 'Close' });
+	    //adding menuitems
+            var menuItem = menu.add({ title : 'Chiudi' });
             //menuItem.setIcon("item1.png");
             menuItem.addEventListener('click', function(e) {
                 // do something when the menu item is tapped
 		Titanium.Android.currentActivity.finish();
+            });
+            var menuItem = menu.add({ title : 'e-mail' });
+            menuItem.addEventListener('click', function(e) {
+                // do something when the menu item is tapped
+		//open popup
+		var win = popup(
+		    "Se vuoi cambiare l'indirizzo a cui viene inviata la segnalazione, inseriscilo qui sotto.\nRicorda che un indirizzo email valido deve contenere la '@':\nEsempio: lav.trentino@lav.it\n\n",
+		    "Indirizzo mail LAV della tua zona",
+		    'targetMail');
+		win.open();
+            });
+            var menuItem = menu.add({ title : 'anteprime' });
+            menuItem.addEventListener('click', function(e) {
+                // do something when the menu item is tapped
+		//open popup
+		var win = popup(
+		    "Se vuoi cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n\n",
+		    "Dimensione dell'anteprima delle foto",
+		    'previewDimension');
+		win.open();
             });
         }
     }
@@ -58,7 +93,7 @@ neww.btn_help = Titanium.UI.createButton({
     //title: "Istruzioni",
     backgroundImage: '/images/help.png',
     width: 48, height: 48,
-    left: 20
+    left: 50
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_take_pic = Titanium.UI.createButton({
