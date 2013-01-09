@@ -96,18 +96,27 @@ neww.btn_help = Titanium.UI.createButton({
     left: 50
     //font: {fontFamily:'Arial', fontSize: 16}
 });
+
+neww.btn_load_pic = Titanium.UI.createButton({
+    backgroundImage: '/images/photo-load.png',
+    width: 48, height: 48,
+    //title: "Foto",
+    left: 180
+    //font: {fontFamily:'Arial', fontSize: 16}
+});
+
 neww.btn_take_pic = Titanium.UI.createButton({
     backgroundImage: '/images/photo.png',
     width: 48, height: 48,
     //title: "Foto",
-    left: 180
+    left: 300
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_get_pos = Titanium.UI.createButton({
     backgroundImage: '/images/gps.png',
     width: 48, height: 48,
     //title: "GPS",
-    left: 340
+    left: 420
     //font: {fontFamily:'Arial', fontSize: 16}
 });
 neww.btn_send = Titanium.UI.createButton({
@@ -121,6 +130,7 @@ neww.btn_send = Titanium.UI.createButton({
 //action buttons
 neww.top_buttons.add(neww.btn_help);
 neww.top_buttons.add(neww.btn_get_pos);
+neww.top_buttons.add(neww.btn_load_pic);
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_send);
 
@@ -146,7 +156,18 @@ neww.btn_help.addEventListener('click', function(){
     
 });
 
-//event listeners for buttons
+neww.btn_load_pic.addEventListener('click', function(){
+    Ti.Media.openPhotoGallery({
+	mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO],
+	success: function(e){
+	    //e.media is the blob image
+	    gallery.add(neww.gview, neww.giter, e.media);
+	},
+	error: function(e){},
+	cancel: function(e){}
+    });
+});
+
 neww.btn_take_pic.addEventListener('click', function(){
     //passed by reference, so the next time giter is the new one
     //because show_camera calls gallery.add() which updates the object
@@ -241,9 +262,10 @@ neww.main_win.add(neww.main_view);
 
 neww.changeButtonsPosition = function(){
     var phone_width = Titanium.Platform.displayCaps.platformWidth;
-    var button_distance = phone_width / 4;
-    neww.btn_take_pic.setLeft( button_distance ); 
-    neww.btn_get_pos.setLeft( button_distance * 2 ); 
+    var button_distance = phone_width / 5;
+    neww.btn_load_pic.setLeft( button_distance ); 
+    neww.btn_take_pic.setLeft( button_distance * 2 ); 
+    neww.btn_get_pos.setLeft( button_distance * 3 ); 
 }
 //change the position also onload
 neww.changeButtonsPosition();
