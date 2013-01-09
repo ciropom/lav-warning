@@ -22,7 +22,19 @@ neww.position = {'latitude':null, 'longitude':null, 'street':null};
 
 neww.main_win = Titanium.UI.createWindow({  
     title:'Creazione di una nuova segnalazione',
-    exitOnClose: true
+    exitOnClose: true,
+    navBarHidden: false,
+    activity : {
+        onCreateOptionsMenu : function(e) {
+            var menu = e.menu;
+            var menuItem = menu.add({ title : 'Close' });
+            //menuItem.setIcon("item1.png");
+            menuItem.addEventListener('click', function(e) {
+                // do something when the menu item is tapped
+		Titanium.Android.currentActivity.finish();
+            });
+        }
+    }
 });
 
 neww.main_view = Titanium.UI.createView({
