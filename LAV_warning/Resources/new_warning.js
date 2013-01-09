@@ -22,12 +22,15 @@ var neww = {};
 neww.position = {'latitude':null, 'longitude':null, 'street':null};
 //load settings 
 neww.target_mail=Ti.App.Properties.getString('targetMail', 'lav.trentino@lav.it');
-neww.preview_dimension=Ti.App.Properties.getString('previewDimension', 150);
+neww.preview_dimension=Ti.App.Properties.getInt('previewDimension', 150);
 
 
 //specify default actions for popup save and cancel buttons
 Ti.App.addEventListener('save-click', function(e){
-    Ti.App.Properties.setString(e.propertyKey, e.txt);
+    if( e.type == 'int' )
+	Ti.App.Properties.setInt(e.propertyKey, parseInt(e.txt));
+    else
+	Ti.App.Properties.setString(e.propertyKey, e.txt);
     e.win.close();
 });
 Ti.App.addEventListener('cancel-click', function(e){
@@ -65,7 +68,8 @@ neww.main_win = Titanium.UI.createWindow({
 		var win = popup(
 		    "Se vuoi cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n\n",
 		    "Dimensione dell'anteprima delle foto",
-		    'previewDimension');
+		    'previewDimension',
+		    'int');
 		win.open();
             });
         }

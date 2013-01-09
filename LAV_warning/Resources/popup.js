@@ -1,6 +1,7 @@
 //txthint : the hint message for the text
 //propertyKey : the key of the Ti.App.Properties value to be set
-popup = function(text,txthint, propertyKey){
+//type: can be 'int' or 'string'
+popup = function(text,txthint, propertyKey,type){
     var win = Ti.UI.createWindow({
         backgroundColor: 'gray',
         fullscreen: true,
@@ -68,7 +69,7 @@ popup = function(text,txthint, propertyKey){
     });
     btnSave.addEventListener('click',function(e){
 	Ti.App.fireEvent("save-click", 
-			 {'event':e, 'txt':txt.value, 'propertyKey': propertyKey, 'win': win} );
+			 {'event':e, 'txt':txt.value, 'propertyKey': propertyKey, 'win': win, 'type':type} );
     });
     frmLog.add(text);
     frmLog.add(txt);

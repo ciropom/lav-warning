@@ -46,10 +46,7 @@ gallery.init_iterator = function(){
 
     iter.rows = 0;
     iter.columns = 0;
-    preview_dimension=Ti.App.Properties.getString('previewDimension', 150);
-
-    iter.image_size = preview_dimension;
-    
+    iter.image_size=Ti.App.Properties.getInt('previewDimension', 150);
     iter.thumbPadding = 5;
     iter.rowPosition = 15;
     iter.rowPositionReset = 15;
