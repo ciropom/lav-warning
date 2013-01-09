@@ -32,15 +32,23 @@ send.showSendView = function(images, position){
     }
 
     email.subject = "Segnalazione maltrattamento";
-    email.toRecipients = ['lav.trentino@lav.it'];
+    //load target mail
+    target_mail=Ti.App.Properties.getString('targetMail', 'lav.trentino@lav.it');
+    email.toRecipients = [target_mail];
     
     var txt = '';
+    txt += "Per favore inserisci qui sotto i dettagli che ritieni utili su questa segnalazione:\n\n\n";
     if(position.latitude !== undefined && position.latitude !== null){
 	txt += "Posizione stimata del maltrattamento: \n";
-	txt += "("+position.latitude+", "+position.longitude+") \n";
-	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it\n";
+	txt += "("+position.latitude+", "+position.longitude+") \n\n";
+	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it \n\n";
+	if( position.street != null ){ 
+	    txt += "Indirizzo stimato della segnalazione:\n";
+	    for( i=0; i<position.street.length ; ++i )
+		txt += position.street[i].address + "\n";
+	}
+	txt += "\n";
     }
-    txt += "Per favore inserisci ulteriori informazioni utili qui sotto, comprese ulteriori indicazioni sulla posizione: \n";
 
     email.messageBody = txt;
 
