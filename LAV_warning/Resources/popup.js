@@ -9,26 +9,26 @@ popup = function(text,txthint, propertyKey,type){
         opacity : 0.50,
         id : "popup"
     });
-    //win.orientationModes = [Ti.UI.PORTRAIT];
+    win.orientationModes = [Ti.UI.PORTRAIT];
  
     var blur = Ti.UI.createAnimation({
         opacity: 0.50
     })
     var shadow = Ti.UI.createView({
-        left: 100,
-        top: 200,
-        right: 100,
-        bottom: 200,
+        left: 50,
+        top: 100,
+        right: 50,
+        bottom: 100,
         opacity: 0.50,
         backgroundColor: 'black',
         borderRadius: 10,
         borderColor: 'black'
     });
     var frmLog = Ti.UI.createView({
-        top : 205,
-        left: 105,
-        right: 105,
-        bottom: 205,
+        top : 105,
+        left: 55,
+        right: 55,
+        bottom: 105,
         opacity: 1,
         borderRadius: 10,
         backgroundColor: 'white',

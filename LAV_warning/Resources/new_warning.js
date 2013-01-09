@@ -56,7 +56,7 @@ neww.main_win = Titanium.UI.createWindow({
                 // do something when the menu item is tapped
 		//open popup
 		var win = popup(
-		    "Se vuoi cambiare l'indirizzo a cui viene inviata la segnalazione, inseriscilo qui sotto.\nRicorda che un indirizzo email valido deve contenere la '@':\nEsempio: lav.trentino@lav.it\n\n",
+		    "Per cambiare l'indirizzo a cui viene inviata la segnalazione, inseriscilo qui sotto.\nRicorda che un indirizzo email valido deve contenere la '@':\nEsempio: lav.trentino@lav.it\n",
 		    "Indirizzo mail LAV della tua zona",
 		    'targetMail');
 		win.open();
@@ -66,7 +66,7 @@ neww.main_win = Titanium.UI.createWindow({
                 // do something when the menu item is tapped
 		//open popup
 		var win = popup(
-		    "Se vuoi cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n\n",
+		    "Per cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n",
 		    "Dimensione dell'anteprima delle foto",
 		    'previewDimension',
 		    'int');
@@ -266,10 +266,14 @@ neww.main_win.add(neww.main_view);
 
 neww.changeButtonsPosition = function(){
     var phone_width = Titanium.Platform.displayCaps.platformWidth;
-    var button_distance = phone_width / 5;
-    neww.btn_load_pic.setLeft( button_distance ); 
-    neww.btn_take_pic.setLeft( button_distance * 2 ); 
-    neww.btn_get_pos.setLeft( button_distance * 3 ); 
+    var padding = 40;
+    var button_distance = (phone_width - padding*2) / 4;
+    
+    neww.btn_help.setLeft( padding ); 
+    neww.btn_load_pic.setLeft( padding + button_distance ); 
+    neww.btn_take_pic.setLeft( padding + (button_distance * 2) ); 
+    neww.btn_get_pos.setLeft( padding + (button_distance * 3) ); 
+    neww.btn_send.setLeft( padding + (button_distance * 4) ); 
 }
 //change the position also onload
 neww.changeButtonsPosition();
