@@ -140,7 +140,7 @@ neww.btn_help.addEventListener('click', function(){
     
     Ti.UI.createAlertDialog({
 	title:'Aiuto',
-	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti. Indicaci la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.\nRicorda: segnalazioni con molte foto richiedono un pò di tempo per essere inviate, quindi abbi pazienza.",
+	message:"Benvenuti nell'applicazione della LAV Trentino per segnalare i maltrattamenti alle LAV locali. Indica la tua posizione e scatta delle foto all'animale maltrattato in modo semplice e veloce tramite i relativi pulsanti e poi inviaci la segnalazione.\nPer cambiare l'indirizzo email della LAV locale a cui vuoi segnalare il maltrattamento usa il tasto fisico 'Opzioni'.\nRicorda: segnalazioni con molte foto richiedono un pò di tempo per essere inviate, quindi abbi pazienza.",
 	buttonNames: ['Indietro']
     }).show();
     
