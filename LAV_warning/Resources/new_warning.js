@@ -161,13 +161,19 @@ neww.btn_get_pos.addEventListener('click', function(){
 	//callback of reversegeocoder
 	//it will be called when the "human readable positions"
 	//are found
-	Ti.UI.createAlertDialog({
-	    title:"Reverse geocoding success!",
-	    message: e,
-	}).show();
-	
-	if( e )
-	    neww.position.street = e[0].address;
+	if( e.success ){
+	    Ti.UI.createAlertDialog({
+		title:"Indirizzo identificato!",
+		message: "Nella segnalazione verrà incluso anche l'indirizzo del luogo in cui ti trovi oltre alle coordinate GPS.",
+	    }).show();
+	    //salvo gli indirizzi.
+	    neww.position.street = e.places;
+	}else
+	    Ti.UI.createAlertDialog({
+		title:"Indirizzo non trovato",
+		message: "Non sono riuscito a risalire all'indirizzo in cui ti trovi.\nNon ti preoccupare comunque, nella segnalazione verranno inserite le coordinate GPS dalle quali si può comunque risalire al punto esatto della segnalazione.",
+	    }).show();
+	    
     }
 
 
