@@ -55,13 +55,17 @@ gallery.init_iterator = function(){
     return iter;
 }
 
+
 gallery.add = function(scroll, iterator, image){
     //add the image passed, in the position pointed by iterator,
     //in the view scroll
     var _img;
     var width_occupied = (iterator.columns + 1) * (iterator.padding + iterator.image_size) + iterator.rowPositionReset;
+    Ti.API.debug("width occupied : "+width_occupied+" | scroll width : "+scroll.size.width);
     // Display the thumbs on 3 columns
-    if ( width_occupied >= scroll.size.width && iterator.rows !== 0) {
+    if ( width_occupied >= scroll.size.width ) {
+	iterator.columns = 0;
+	iterator.rows += 1;
 	iterator.columnPosition += iterator.image_size + iterator.thumbPadding;
 	iterator.rowPosition = iterator.rowPositionReset;
     }
@@ -75,34 +79,42 @@ gallery.add = function(scroll, iterator, image){
 	id: iterator.data.index
     });
 
-    
-    // Attach click listener to each thumb
-    _img.addEventListener('click', function (e) {
-    	// Create a new window and show the image selected
-    	_imageWin = Ti.UI.createWindow({
-    	    backgroundColor: '#000',
-    	    title: "Foto numero "+iterator.data.index.toString()+" del maltrattamento"
-    	});
-	
-    	var imageView = Ti.UI.createImageView({
-    	    //left:0,right:0,top:0,bottom:0,
-    	    image: image.nativePath
-    	});
+    function createFullViewer(imagepath){
+	return function (e) {
+    	    var path = imagepath;
+	    // Create a new window and show the image selected
+    	    _imageWin = Ti.UI.createWindow({
+    		backgroundColor: '#000',
+		layout: "vertical",
+    		title: "Foto numero "+iterator.data.index.toString()+" del maltrattamento"
+    	    });
+	    //all orientation modes are ok
+	    _imageWin.orientationModes = [];
+	    //build image view
+	    Ti.API.debug("image native path: '"+path+"'");
+    	    var imageView = Ti.UI.createImageView({
+    		//left:0,right:0,top:0,bottom:0,
+    		image: path
+    	    });
+	    //add image
+    	    _imageWin.add(imageView);
+    	    _imageWin.addEventListener('click', function(e){
+    		_imageWin.close();
+    	    });
+	    //build remove button
 
-    	_imageWin.add(imageView);
-    	_imageWin.addEventListener('click', function(e){
-    	    _imageWin.close();
-    	});
-	
-    	_imageWin.open();
-    });
+    	    _imageWin.open();
+	}
+    }
+
+    // Attach click listener to each thumb
+    _img.addEventListener('click', createFullViewer(image.nativePath));
 
     // Add thumb to the scrollview
     scroll.add(_img);
 
     // Increment pointers
     iterator.columns += 1;
-    iterator.rows += 1;
     iterator.rowPosition += iterator.image_size + iterator.padding;
     
     //save data
