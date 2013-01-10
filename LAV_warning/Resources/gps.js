@@ -12,7 +12,7 @@
 /*   along with "LAV Warning".  If not, see <http://www.gnu.org/licenses/>. */
 
 Ti.Geolocation.purpose = 'Get Current Location';
-Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
 Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;
 Titanium.Geolocation.distanceFilter = 4;
 
@@ -25,6 +25,7 @@ gps.handleLocation = function(e) {
     if (e.success) {
         Ti.App.fireEvent("app:getCoords", e.coords );
 	gps.removeHandler();
+	Ti.API.trace("removed location handler");
     }else{
 	var wait_dialog = Titanium.UI.createNotification({
 	    duration: 2000,
@@ -35,6 +36,7 @@ gps.handleLocation = function(e) {
 };
 gps.addHandler = function() {
     if (!gps.locationAdded) {
+	Ti.API.trace("adding location handler");
 	Ti.Geolocation.addEventListener('location', gps.handleLocation);
 	gps.locationAdded = true;
     }
@@ -42,6 +44,7 @@ gps.addHandler = function() {
 gps.removeHandler = function() {
     if (gps.locationAdded) {
 	Ti.Geolocation.removeEventListener('location', gps.handleLocation);
+	Ti.API.trace("removed location handler");
 	gps.locationAdded = false;
     }
 };
