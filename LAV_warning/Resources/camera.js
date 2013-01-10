@@ -16,12 +16,12 @@ Titanium.include("gallery.js");
 var camera = {};
 
 // this file handles all the things related to the camera
-camera.show_camera = function(view, iter){
+camera.show_camera = function(iter){
     Titanium.Media.showCamera({
 	success:function(event) {
 	    // called when media returned from the camera
 	    if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-		iter = gallery.add(view, iter, event.media);
+		iter = gallery.add(iter, event.media.nativePath);
 	    } else {
 		alert("got the wrong type back ="+event.mediaType);
 	    }

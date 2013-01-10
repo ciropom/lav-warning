@@ -75,6 +75,8 @@ neww.main_win = Titanium.UI.createWindow({
         }
     }
 });
+//only portrait mode alowed
+neww.main_win.orientationModes = [Ti.UI.PORTRAIT];
 
 neww.main_view = Titanium.UI.createView({
     //backgroundColor:'transparent',
@@ -138,8 +140,13 @@ neww.top_buttons.add(neww.btn_load_pic);
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_send);
 
-neww.gview = gallery.create();
-neww.giter = gallery.init_iterator();
+neww.giter = gallery.create();
+//listen for app:galleryRebuilt signal
+//Ti.App.addEventListener('app:galleryRebuilt', function(e){ 
+    //update the iterator
+//    neww.giter = e.new_iterator;
+//});
+
 
 neww.welcome = Ti.UI.createLabel({
   text: 'Foto che verranno incluse nella segnalazione:',
@@ -165,7 +172,7 @@ neww.btn_load_pic.addEventListener('click', function(){
 	mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO],
 	success: function(e){
 	    //e.media is the blob image
-	    gallery.add(neww.gview, neww.giter, e.media);
+	    gallery.add(neww.giter, e.media.nativePath);
 	},
 	error: function(e){},
 	cancel: function(e){}
@@ -175,7 +182,7 @@ neww.btn_load_pic.addEventListener('click', function(){
 neww.btn_take_pic.addEventListener('click', function(){
     //passed by reference, so the next time giter is the new one
     //because show_camera calls gallery.add() which updates the object
-    camera.show_camera(neww.gview, neww.giter);
+    camera.show_camera(neww.giter);
 });
 
 neww.btn_get_pos.addEventListener('click', function(){
@@ -257,7 +264,7 @@ neww.btn_send.addEventListener('click', function(){
 //layout main panel
 neww.main_view.add(neww.top_buttons);
 neww.main_view.add(neww.welcome);
-neww.main_view.add(neww.gview);
+neww.main_view.add(neww.giter.widget);
 
 
 // it will be opened by the app.js file
@@ -266,14 +273,15 @@ neww.main_win.add(neww.main_view);
 
 neww.changeButtonsPosition = function(){
     var phone_width = Titanium.Platform.displayCaps.platformWidth;
-    var padding = 40;
+    var padding = 80;
+    var button_half_width = 24;
     var button_distance = (phone_width - padding*2) / 4;
     
-    neww.btn_help.setLeft( padding ); 
-    neww.btn_load_pic.setLeft( padding + button_distance ); 
-    neww.btn_take_pic.setLeft( padding + (button_distance * 2) ); 
-    neww.btn_get_pos.setLeft( padding + (button_distance * 3) ); 
-    neww.btn_send.setLeft( padding + (button_distance * 4) ); 
+    neww.btn_help.setLeft( padding - button_half_width ); 
+    neww.btn_load_pic.setLeft( padding + button_distance - button_half_width ); 
+    neww.btn_take_pic.setLeft( padding + (button_distance * 2) - button_half_width); 
+    neww.btn_get_pos.setLeft( padding + (button_distance * 3) - button_half_width); 
+    neww.btn_send.setLeft( padding + (button_distance * 4) - button_half_width); 
 }
 //change the position also onload
 neww.changeButtonsPosition();
@@ -293,5 +301,5 @@ neww.main_win.addEventListener('postlayout', function(e){
     Ti.API.trace("buttons "+neww.top_buttons.size.width+","+neww.top_buttons.size.height+" ");
     Ti.API.trace("mainview "+neww.main_view.size.width+","+neww.main_view.size.height+" ");
     Ti.API.trace("welcome "+neww.welcome.size.width+","+neww.welcome.size.height+" ");
-    Ti.API.trace("scrollview "+neww.gview.size.width+","+neww.gview.size.height+" ");
+    Ti.API.trace("scrollview "+neww.giter.widget.size.width+","+neww.giter.widget.size.height+" ");
 });

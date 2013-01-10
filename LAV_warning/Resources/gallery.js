@@ -14,16 +14,8 @@
 var gallery = {};
 
 gallery.create = function(){
-    // Create the container for the gallery
-    // return Ti.UI.createView({
-    // 	backgroundColor:'transparent',
-    // 	top:0,
-    // 	left:0,
-    // 	width:'100%',
-    // 	height:'100%',
-    // });
-    
-    return Ti.UI.createScrollView({
+
+    var scroll = Ti.UI.createScrollView({
 	contentWidth: 'auto',
     	contentHeight: 'auto',
 	width: '100%',
@@ -33,17 +25,35 @@ gallery.create = function(){
     	showVerticalScrollIndicator: true,
     	showHorizontalScrollIndicator: false
     });
-}
 
-gallery.init_iterator = function(){
     //create an iterator used to keep track
     //of the position of the next image to be added
     var iter = {};
+    //widgets info
+    iter.widget = scroll;
+    gallery._reset(iter);
 
+    return iter;
+}
+
+//reset gallery pointers
+//should not be used by externals
+gallery._reset = function(iter) {
+    //remove inner view if present
+    if( iter._inner != undefined && iter._inner != null )
+	iter.widget.remove(iter._inner);
+    //create new inner view
+    iter._inner = Ti.UI.createView({ height: 'auto' });
+    iter.widget.add(iter._inner);
+    var old_data;
+    if(iter.data != undefined )
+	old_data = JSON.parse( JSON.stringify( iter.data ) );
+
+    //images info
     iter.data = {};
     iter.data.index = 0;
     iter.data.paths = [];
-
+    //layout infos
     iter.rows = 0;
     iter.columns = 0;
     iter.image_size=Ti.App.Properties.getInt('previewDimension', 150);
@@ -52,14 +62,53 @@ gallery.init_iterator = function(){
     iter.rowPositionReset = 15;
     iter.padding = 5;
     iter.columnPosition	= 15;
-    return iter;
+
+    return old_data;
 }
 
+//imagePath is the nativepath to be removed
+//return the new iterator for the gallery
+gallery.remove = function(iterator, imagePath){
+    Ti.API.debug("removing '"+imagePath+"' from gallery.");
+    var i = 0;
+    var scroll = iterator._inner;
+    //reset iterator
+    var old_data = gallery._reset(iterator);
+    //update
+    for( ; i < old_data.index ; ++i ){
+	var gallerypath = old_data.paths[i];
+	//scroll.remove(scroll.children[i]);
+	//add it if it is not to be removed
+	if( imagePath != gallerypath )
+	    gallery.add(iterator, gallerypath);
+	Ti.API.trace("processed image '"+gallerypath+"''");
+    }
+    /*
+    var tmp_iter = gallery.init_iterator();
+    //readd all the images
+    for( i=0; i < iterator.data.index; ++i)
+	if( imagePath != iterator.data.paths[i] ){
+	    gallery.add(scroll, tmp_iter, iterator.data.paths[i]);
+	    Ti.API.trace("added image '"+iterator.data.paths[i]+"'");
+	}
+    //free memory?
+    
+    //set new iterator
+    
+    iterator = JSON.parse( JSON.stringify( tmp_iter ));
+    iterator.data.paths = tmp_iter.data.paths;
+    iterator.data = tmp_iter.data;
+    iterator = tmp_iter;
+    */
+    Ti.API.debug("gallery.remove: new Iterator: "+JSON.stringify( iterator.data ));
+}
 
-gallery.add = function(scroll, iterator, image){
+//eventually raises an app:galleryRebuilt signal if the user removes an image
+gallery.add = function(iterator, imagePath){
     //add the image passed, in the position pointed by iterator,
     //in the view scroll
     var _img;
+    var scroll = iterator._inner;
     var width_occupied = (iterator.columns + 1) * (iterator.padding + iterator.image_size) + iterator.rowPositionReset;
     Ti.API.debug("width occupied : "+width_occupied+" | scroll width : "+scroll.size.width);
     // Display the thumbs on 3 columns
@@ -71,7 +120,7 @@ gallery.add = function(scroll, iterator, image){
     }
 
     _img = Ti.UI.createImageView({
-	image: image.nativePath,
+	image: imagePath,
 	width: iterator.image_size,
 	height: iterator.image_size,
 	left: iterator.rowPosition,
@@ -86,7 +135,7 @@ gallery.add = function(scroll, iterator, image){
     	    _imageWin = Ti.UI.createWindow({
     		backgroundColor: '#000',
 		layout: "vertical",
-    		title: "Foto numero "+iterator.data.index.toString()+" del maltrattamento"
+    		title: "Foto del maltrattamento"
     	    });
 	    //all orientation modes are ok
 	    _imageWin.orientationModes = [];
@@ -102,13 +151,26 @@ gallery.add = function(scroll, iterator, image){
     		_imageWin.close();
     	    });
 	    //build remove button
+	    var _btnRemove = Titanium.UI.createButton({
+		title: "Rimuovi",
+		//backgroundImage: '/images/help.png',
+		//width: 48, height: 48,
+		//left: 50
+	    });
+	    _btnRemove.addEventListener('click', function(e){
+		var new_iter = gallery.remove(iterator,path);
+		Ti.App.fireEvent("app:galleryRebuilt", 
+				 {'new_iterator' : new_iter,
+				  'cause' : 'image-removed'});
+	    });
+	    _imageWin.add(_btnRemove);
 
     	    _imageWin.open();
 	}
     }
 
     // Attach click listener to each thumb
-    _img.addEventListener('click', createFullViewer(image.nativePath));
+    _img.addEventListener('click', createFullViewer(imagePath));
 
     // Add thumb to the scrollview
     scroll.add(_img);
@@ -118,10 +180,11 @@ gallery.add = function(scroll, iterator, image){
     iterator.rowPosition += iterator.image_size + iterator.padding;
     
     //save data
-    iterator.data.paths[iterator.data.index] = image.nativePath;
+    iterator.data.paths[iterator.data.index] = imagePath;
     iterator.data.index += 1;
 
-    Ti.API.debug("immagine "+image.nativePath+" aggiunta");
+    Ti.API.debug("gallery.add: Iterator: "+JSON.stringify( iterator.data ));
+    Ti.API.debug("immagine "+imagePath+" aggiunta");
     //return the iterator to the next position
     return iterator;
 }
