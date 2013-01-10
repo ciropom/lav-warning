@@ -77,29 +77,11 @@ gallery.remove = function(iterator, imagePath){
     //update
     for( ; i < old_data.index ; ++i ){
 	var gallerypath = old_data.paths[i];
-	//scroll.remove(scroll.children[i]);
 	//add it if it is not to be removed
 	if( imagePath != gallerypath )
 	    gallery.add(iterator, gallerypath);
 	Ti.API.trace("processed image '"+gallerypath+"''");
     }
-    /*
-    var tmp_iter = gallery.init_iterator();
-    //readd all the images
-    for( i=0; i < iterator.data.index; ++i)
-	if( imagePath != iterator.data.paths[i] ){
-	    gallery.add(scroll, tmp_iter, iterator.data.paths[i]);
-	    Ti.API.trace("added image '"+iterator.data.paths[i]+"'");
-	}
-    //free memory?
-    
-    //set new iterator
-    
-    iterator = JSON.parse( JSON.stringify( tmp_iter ));
-    iterator.data.paths = tmp_iter.data.paths;
-    iterator.data = tmp_iter.data;
-    iterator = tmp_iter;
-    */
     Ti.API.debug("gallery.remove: new Iterator: "+JSON.stringify( iterator.data ));
 }
 
@@ -142,7 +124,6 @@ gallery.add = function(iterator, imagePath){
 	    //build image view
 	    Ti.API.debug("image native path: '"+path+"'");
     	    var imageView = Ti.UI.createImageView({
-    		//left:0,right:0,top:0,bottom:0,
     		image: path
     	    });
 	    //add image
@@ -153,9 +134,6 @@ gallery.add = function(iterator, imagePath){
 	    //build remove button
 	    var _btnRemove = Titanium.UI.createButton({
 		title: "Rimuovi",
-		//backgroundImage: '/images/help.png',
-		//width: 48, height: 48,
-		//left: 50
 	    });
 	    _btnRemove.addEventListener('click', function(e){
 		var new_iter = gallery.remove(iterator,path);
