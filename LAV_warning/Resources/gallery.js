@@ -121,16 +121,6 @@ gallery.add = function(iterator, imagePath){
     	    });
 	    //all orientation modes are ok
 	    _imageWin.orientationModes = [];
-	    //build image view
-	    Ti.API.debug("image native path: '"+path+"'");
-    	    var imageView = Ti.UI.createImageView({
-    		image: path
-    	    });
-	    //add image
-    	    _imageWin.add(imageView);
-    	    _imageWin.addEventListener('click', function(e){
-    		_imageWin.close();
-    	    });
 	    //build remove button
 	    var _btnRemove = Titanium.UI.createButton({
 		title: "Rimuovi",
@@ -142,6 +132,16 @@ gallery.add = function(iterator, imagePath){
 				  'cause' : 'image-removed'});
 	    });
 	    _imageWin.add(_btnRemove);
+	    //build image view
+	    Ti.API.debug("image native path: '"+path+"'");
+    	    var imageView = Ti.UI.createImageView({
+    		image: path
+    	    });
+	    //add image
+    	    _imageWin.add(imageView);
+    	    _imageWin.addEventListener('click', function(e){
+    		_imageWin.close();
+    	    });
 
     	    _imageWin.open();
 	}
