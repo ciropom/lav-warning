@@ -27,9 +27,12 @@ neww.preview_dimension=Ti.App.Properties.getInt('previewDimension', 150);
 
 //specify default actions for popup save and cancel buttons
 Ti.App.addEventListener('save-click', function(e){
-    if( e.type == 'int' )
+    if( e.type == 'int' ){
 	Ti.App.Properties.setInt(e.propertyKey, parseInt(e.txt));
-    else
+	//if preview dimension changed update gallery layout
+	if( e.propertyKey == 'previewDimension' )
+	    gallery.updateLayout(neww.giter);
+    }else
 	Ti.App.Properties.setString(e.propertyKey, e.txt);
     e.win.close();
 });
@@ -76,7 +79,7 @@ neww.main_win = Titanium.UI.createWindow({
     }
 });
 //only portrait mode alowed
-neww.main_win.orientationModes = [Ti.UI.PORTRAIT];
+//neww.main_win.orientationModes = [Ti.UI.PORTRAIT];
 
 neww.main_view = Titanium.UI.createView({
     //backgroundColor:'transparent',
@@ -292,6 +295,7 @@ neww.main_win.open();
 Ti.Gesture.addEventListener('orientationchange', function(e) {
     Ti.API.trace(Ti.Gesture.orientation);
     neww.changeButtonsPosition();
+    gallery.updateLayout(neww.giter);
 });
 
 neww.main_win.addEventListener('postlayout', function(e){

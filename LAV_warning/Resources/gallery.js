@@ -66,6 +66,10 @@ gallery._reset = function(iter) {
     return old_data;
 }
 
+gallery.updateLayout = function(iterator){
+    gallery.remove(iterator, null);
+}
+
 //imagePath is the nativepath to be removed
 //return the new iterator for the gallery
 gallery.remove = function(iterator, imagePath){
