@@ -14,18 +14,20 @@ cp build/android/bin/app.apk .
 unzip -o -d temp/ app.apk
 
 #remove some things - you may want to remove other cruft
-#rm -rf temp/lib/armeabi
+rm -rf temp/lib/armeabi
 rm -rf temp/lib/x86
+rm -rf temp/res/drawable/background.png
+rm -rf temp/ti
 
 #zip it
 cd temp
-zip -r ../dist/app-unsigned.apk *
+zip -r ../dist/LAV_Warning-unsigned.apk *
 cd ..
 
-#sign I haven't a key
-#jarsigner -sigalg MD5withRSA -digestalg SHA1 -storepass tirocks -keystore "$MOBILE_SDK/android/dev_keystore" -signedjar dist/app.apk dist/app-unsigned.apk tidev
-#$ANDROID_SDK/tools/zipalign -v 4 dist/app.apk dist/app.apkz
-#mv dist/app.apkz dist/app.apk
+#sign
+jarsigner -sigalg MD5withRSA -digestalg SHA1 -keystore ../apk.keystore -signedjar dist/LAV_Warning.apk dist/LAV_Warning-unsigned.apk mykey
+$ANDROID_SDK/tools/zipalign -v 4 dist/LAV_Warning.apk dist/LAV_Warning.apkz
+mv dist/LAV_Warning.apkz dist/LAV_Warning.apk
 
 #install
 #$ANDROID_SDK/platform-tools/adb -d install -r dist/app.apk
@@ -34,4 +36,4 @@ cd ..
 echo "Optimized app from "
 du -hs app.apk
 echo "to"
-du -hs dist/LAV_Warning-unsigned.apk
+du -hs dist/LAV_Warning.apk
