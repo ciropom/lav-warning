@@ -30,26 +30,30 @@ popup = function(text,txthint, propertyKey,type){
         opacity: 0.50
     })
     var shadow = Ti.UI.createView({
-        left: 50,
+        width: 245,
+	height: 255,
+        /*left: 50,
         top: 100,
         right: 50,
-        bottom: 100,
+        bottom: 100,*/
         opacity: 0.50,
         backgroundColor: 'black',
         borderRadius: 10,
         borderColor: 'black'
     });
     var frmLog = Ti.UI.createView({
-        top : 105,
+        width: 240,
+	height: 250,
+	/*top : 105,
         left: 55,
         right: 55,
-        bottom: 105,
+        bottom: 105,*/
         opacity: 1,
         borderRadius: 10,
         backgroundColor: 'white',
         layout: "vertical"
     });
-    var text = Ti.UI.createLabel({
+    var textlabel = Ti.UI.createLabel({
 	color: '#000000',
 	font: { fontSize:24 },
 	text: text,
@@ -86,7 +90,8 @@ popup = function(text,txthint, propertyKey,type){
 	Ti.App.fireEvent("save-click", 
 			 {'event':e, 'txt':txt.value, 'propertyKey': propertyKey, 'win': win, 'type':type} );
     });
-    frmLog.add(text);
+    if( text != "" )
+	frmLog.add(textlabel);
     frmLog.add(txt);
     frmLog.add(btnSave);
     frmLog.add(btnCancel);

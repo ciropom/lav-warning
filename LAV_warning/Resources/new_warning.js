@@ -71,8 +71,8 @@ neww.main_win = Titanium.UI.createWindow({
                 // do something when the menu item is tapped
 		//open popup
 		var win = popup(
-		    "Per cambiare l'indirizzo a cui viene inviata la segnalazione, inseriscilo qui sotto.\nRicorda che un indirizzo email valido deve contenere la '@':\nEsempio: lav.trentino@lav.it\n",
-		    "Indirizzo mail LAV della tua zona",
+		    "",
+		    "Nuova mail LAV",
 		    'targetMail');
 		win.open();
             });
@@ -81,8 +81,10 @@ neww.main_win = Titanium.UI.createWindow({
                 // do something when the menu item is tapped
 		//open popup
 		var win = popup(
-		    "Per cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n",
-		    "Dimensione dell'anteprima delle foto",
+		    "",
+		    /*
+		    "Per cambiare la dimensione delle anteprime delle foto scattate inserisci qui sotto un valore numerico espresso in pixel.\nEsempio: 150\n",*/
+		    "Dimensione anteprime",
 		    'previewDimension',
 		    'int');
 		win.open();
@@ -90,8 +92,9 @@ neww.main_win = Titanium.UI.createWindow({
         }
     }
 });
-//only portrait mode alowed
-//neww.main_win.orientationModes = [Ti.UI.PORTRAIT];
+//only landscape mode alowed
+if( Titanium.Platform.displayCaps.platformWidth <= 300 )
+    neww.main_win.orientationModes = [Ti.UI.LANDSCAPE_LEFT];
 
 neww.main_view = Titanium.UI.createView({
     //backgroundColor:'transparent',
