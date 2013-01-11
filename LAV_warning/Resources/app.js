@@ -11,5 +11,7 @@
 /*   You should have received a copy of the GNU General Public License */
 /*   along with "LAV Warning".  If not, see <http://www.gnu.org/licenses/>. */
 
+/* Author: Danilo Tomasoni <danilo.tomasoni@cryptolab.net> */
+
 Titanium.include("new_warning.js");
 

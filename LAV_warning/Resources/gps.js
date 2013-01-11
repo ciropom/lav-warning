@@ -11,6 +11,8 @@
 /*   You should have received a copy of the GNU General Public License */
 /*   along with "LAV Warning".  If not, see <http://www.gnu.org/licenses/>. */
 
+/*   Author: Danilo Tomasoni <danilo.tomasoni@cryptolab.net> */
+
 Ti.Geolocation.purpose = 'Get Current Location';
 Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_HIGH;
 Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;
