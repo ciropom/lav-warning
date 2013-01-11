@@ -34,4 +34,4 @@ cd ..
 echo "Optimized app from "
 du -hs app.apk
 echo "to"
-du -hs dist/app-unsigned.apk
+du -hs dist/LAV_Warning-unsigned.apk
