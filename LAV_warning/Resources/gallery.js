@@ -135,7 +135,17 @@ gallery.add = function(iterator, imagePath){
 	    //build image view
 	    Ti.API.debug("image native path: '"+path+"'");
     	    var imageView = Ti.UI.createImageView({
-    		image: path
+    		image: path,
+		error: function(e){
+		    Ti.API.debug("Failed to load image '"+e.image+"'");
+		    e.source.setImage('/images/failed.png');
+		    /*Ti.UI.createAlertDialog({
+			title:'Errore',
+			message:"Non sono riuscito a caricare l'immagine.\nQuesto in genere accade quando l'immagine è troppo grande, o quando hai molte applicazioni aperte.",
+			buttonNames: ['Indietro']
+		    }).show();*/
+
+		}
     	    });
 	    //add image
     	    _imageWin.add(imageView);
