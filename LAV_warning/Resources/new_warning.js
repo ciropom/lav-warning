@@ -28,7 +28,17 @@ neww.preview_dimension=Ti.App.Properties.getInt('previewDimension', 150);
 //specify default actions for popup save and cancel buttons
 Ti.App.addEventListener('save-click', function(e){
     if( e.type == 'int' ){
-	Ti.App.Properties.setInt(e.propertyKey, parseInt(e.txt));
+	try{
+	    Ti.App.Properties.setInt(e.propertyKey, parseInt(e.txt));
+	}catch(e){
+	    Ti.API.debug("save-int: "+e.message);
+	    //show error message and stay there
+	    Titanium.UI.createNotification({
+		duration: 2000,
+		message: "Errore: inserire un valore numerico." 
+	    }).show();
+	    return;
+	}
 	//if preview dimension changed update gallery layout
 	if( e.propertyKey == 'previewDimension' )
 	    gallery.updateLayout(neww.giter);
