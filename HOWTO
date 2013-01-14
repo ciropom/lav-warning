@@ -1,0 +1,43 @@
+1. android sdk in $ANDROID_SDK
+2. titanium mobile sdk in $TITANIUM_SDK
+3. some avd (at least one, created using $ANDROID_SDK/tools/android 
+app)
+
+TO RUN:
+go to LAV_Warning folder
+run an avd:
+$ANDROID_SDK/tools/emulator-arm -avd <youravd>
+
+when the avd is ready type
+
+titanium.py run
+
+Note: titanium.py is in the mobilesdk folder of titanium sdk
+
+this will compile LAV Warning and install its debug version in the emulator.
+
+
+To build the release version 
+
+be sure to have a debug version compiled with the
+
+titanium.py run
+
+command in the LAV_Warning/build/android/bin folder. 
+The default app name should be "app.apk".
+ 
+Go to LAV_Warning and type 
+
+./release.sh
+
+this script takes the "app.apk" debug version, 
+strips out from it some unneeded libraries and sign it using a keystore created with keytool 
+(see jdk documentation for further informations)
+that is assumed to be in the root folder and named "apk.keystore".
+The key named "mykey" in the keystore would be used.
+
+this will create in LAV_Warning/dist/
+two apk, 
+LAV_Warning.apk which is signed with the apk.keystore key
+LAV_Warning-unsigned.apk wich is unsigned.
+
