@@ -15,6 +15,7 @@ unzip -o -d temp/ app.apk
 
 #remove some things - you may want to remove other cruft
 #rm -rf temp/lib/armeabi
+#rm -rf temp/lib/armeabi-v7a
 rm -rf temp/lib/x86
 rm -rf temp/res/drawable/background.png
 rm -rf temp/ti
