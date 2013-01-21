@@ -24,14 +24,15 @@ popup = function(text,txthint, propertyKey,type){
         opacity : 0.50,
         id : "popup"
     });
-    win.orientationModes = [Ti.UI.PORTRAIT];
- 
+    var width = 240;
+    var height = 220;
+	
     var blur = Ti.UI.createAnimation({
         opacity: 0.50
     })
     var shadow = Ti.UI.createView({
-        width: 245,
-	height: 255,
+        width: width + 5,
+	height: height + 5,
         /*left: 50,
         top: 100,
         right: 50,
@@ -42,8 +43,8 @@ popup = function(text,txthint, propertyKey,type){
         borderColor: 'black'
     });
     var frmLog = Ti.UI.createView({
-        width: 240,
-	height: 250,
+        width: width,
+	height: height,
 	/*top : 105,
         left: 55,
         right: 55,
@@ -70,7 +71,9 @@ popup = function(text,txthint, propertyKey,type){
         txtID : "txt"
     });
     var btngroup = Ti.UI.createView({
-        layout: "vertical"
+        layout: "horizontal",
+        left: 20,
+	top: 20
     });
     var btnCancel = Ti.UI.createButton({
         title: "Annulla",
@@ -93,8 +96,9 @@ popup = function(text,txthint, propertyKey,type){
     if( text != "" )
 	frmLog.add(textlabel);
     frmLog.add(txt);
-    frmLog.add(btnSave);
-    frmLog.add(btnCancel);
+    btngroup.add(btnSave);
+    btngroup.add(btnCancel);
+    frmLog.add(btngroup);
     shadow.animate(blur);
     win.add(shadow);
     win.add(frmLog);
