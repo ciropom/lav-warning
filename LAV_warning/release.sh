@@ -10,8 +10,8 @@ rm -r temp/*
 rm -r dist/*
 
 #copy apk
-cp build/android/bin/app.apk .
-unzip -o -d temp/ app.apk
+cp build/android/bin/app-unsigned.apk .
+unzip -o -d temp/ app-unsigned.apk
 
 #remove some things - you may want to remove other cruft
 #rm -rf temp/lib/armeabi
