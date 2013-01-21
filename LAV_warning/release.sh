@@ -6,8 +6,8 @@ MOBILE_SDK=$TITANIUM_SDK
 
 mkdir temp
 mkdir dist
-rm -r temp/*
-rm -r dist/*
+rm -rf temp/*
+rm -rf dist/*
 
 #copy apk
 cp build/android/bin/app-unsigned.apk .
@@ -15,7 +15,7 @@ unzip -o -d temp/ app-unsigned.apk
 
 #remove some things - you may want to remove other cruft
 #rm -rf temp/lib/armeabi
-#rm -rf temp/lib/armeabi-v7a
+rm -rf temp/lib/armeabi-v7a
 rm -rf temp/lib/x86
 rm -rf temp/res/drawable/background.png
 rm -rf temp/ti
