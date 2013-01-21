@@ -14,14 +14,16 @@ cp build/android/bin/app-unsigned.apk .
 unzip -o -d temp/ app-unsigned.apk
 
 #remove some things - you may want to remove other cruft
-#rm -rf temp/lib/armeabi
-rm -rf temp/lib/armeabi-v7a
+rm -rf temp/lib/armeabi
+#rm -rf temp/lib/armeabi-v7a
 rm -rf temp/lib/x86
 rm -rf temp/res/drawable/background.png
 rm -rf temp/ti
 
 #zip it
 cd temp
+#solve eventual rights problem
+chmod -R 777 *
 zip -r ../dist/LAV_Warning-unsigned.apk *
 cd ..
 
@@ -35,6 +37,6 @@ mv dist/LAV_Warning.apkz dist/LAV_Warning.apk
  
 #size
 echo "Optimized app from "
-du -hs app.apk
+du -hs app-unsigned.apk
 echo "to"
 du -hs dist/LAV_Warning.apk
