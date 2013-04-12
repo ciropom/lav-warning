@@ -20,6 +20,21 @@ Titanium.Geolocation.distanceFilter = 4;
 
 var gps = {};
 
+//if andorid tune geolocation
+if( Ti.Platform.osname == 'android' ){
+    Ti.API.trace("Android device, tuning gps parameters");
+    Titanium.Geolocation.Android.manualMode = true;
+    gps.provider = Ti.Geolocation.Android.createLocationProvider({
+	name: Ti.Geolocation.PROVIDER_GPS,
+	minUpdateTime: '5.0',
+	minUpdateDistance: '3.0'
+    });
+    Ti.Geolocation.Android.addLocationProvider(gps.provider);
+    Ti.API.info("GPS: minUpdateTime = " + gps.provider.minUpdateTime);
+    Ti.API.info("GPS: minUpdateDistance = " + gps.provider.minUpdateDistance); 
+}
+
+
     //returns 1 if geolocation is enabled, false otherwise
 
 gps.locationAdded = false;
