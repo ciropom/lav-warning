@@ -39,8 +39,9 @@
         <tool-api-level>8</tool-api-level>
         <manifest android:installLocation="auto" android:versionCode="3"
                 android:versionName="2.0.1">
-      			<uses-sdk android:minSdkVersion="7"/>
-   		</manifest>
+      		<uses-sdk android:minSdkVersion="7"/>
+		<supports-screens android:anyDensity="false"/>
+	</manifest>
     </android>
     <modules/>
 </ti:app>
