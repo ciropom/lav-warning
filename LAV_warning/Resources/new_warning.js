@@ -108,7 +108,7 @@ neww.main_view = Titanium.UI.createView({
 
 neww.top_buttons = Titanium.UI.createView({
     layout:'composite',
-    height: '100',
+    height: '80',
     width:Titanium.UI.FILL
 });
 
@@ -170,7 +170,7 @@ neww.welcome = Ti.UI.createLabel({
   text: 'Foto che verranno incluse nella segnalazione:',
   textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
   color: '#000000',
-  font: { fontSize:24 }
+  font: { fontSize:16 }
 });
 
 //controllers wiring
@@ -290,7 +290,7 @@ neww.main_win.add(neww.main_view);
 
 neww.changeButtonsPosition = function(){
     var phone_width = Titanium.Platform.displayCaps.platformWidth;
-    var padding = 80;
+    var padding = 50;
     var button_half_width = 24;
     var button_distance = (phone_width - padding*2) / 4;
     
