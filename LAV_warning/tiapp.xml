@@ -10,7 +10,7 @@
     <sdk-version>3.0.2.GA</sdk-version>
     <id>it.lav.warning</id>
     <name>LAV Warning</name>
-    <version>2.0.2</version>
+    <version>2.1.0</version>
     <publisher>Danilo Tomasoni</publisher>
     <url>www.lav.it</url>
     <description>Un applicazione per segnalare maltrattamenti di animali alla LAV</description>
@@ -20,7 +20,7 @@
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
     <statusbar-hidden>true</statusbar-hidden>
-    <fullscreen>true</fullscreen>
+    <fullscreen>false</fullscreen>
     <navbar-hidden>true</navbar-hidden>
     <analytics>true</analytics>
     <guid></guid>
@@ -37,8 +37,8 @@
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <tool-api-level>8</tool-api-level>
-        <manifest android:installLocation="auto" android:versionCode="4"
-                android:versionName="2.0.2">
+        <manifest android:installLocation="auto" android:versionCode="5"
+                android:versionName="2.1.0">
       		<uses-sdk android:minSdkVersion="7"/>
 		<supports-screens android:anyDensity="false"/>
 	</manifest>

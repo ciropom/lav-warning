@@ -20,8 +20,7 @@ Titanium.include("send.js");
 Titanium.include("popup.js");
 
 var neww = {};
-
-neww.position = {'latitude':null, 'longitude':null, 'street':null};
+neww.gps_enabled = true;
 //load settings 
 neww.target_mail=Ti.App.Properties.getString('targetMail', 'lav.trentino@lav.it');
 neww.preview_dimension=Ti.App.Properties.getInt('previewDimension', 150);
@@ -57,16 +56,19 @@ neww.main_win = Titanium.UI.createWindow({
     exitOnClose: true,
     navBarHidden: false,
     activity : {
-        onCreateOptionsMenu : function(e) {
+        //option menu configuration
+	onCreateOptionsMenu : function(e) {
             var menu = e.menu;
 	    //adding menuitems
-            var menuItem = menu.add({ title : 'Chiudi' });
+            var menuItem = menu.add({ title : 'Chiudi', itemId: 0 });
             //menuItem.setIcon("item1.png");
             menuItem.addEventListener('click', function(e) {
+		//remove location handler if present
+		gps.removeHandler();
                 // do something when the menu item is tapped
 		Titanium.Android.currentActivity.finish();
             });
-            var menuItem = menu.add({ title : 'e-mail' });
+            var menuItem = menu.add({ title : 'e-mail', itemId: 1 });
             menuItem.addEventListener('click', function(e) {
                 // do something when the menu item is tapped
 		//open popup
@@ -76,7 +78,7 @@ neww.main_win = Titanium.UI.createWindow({
 		    'targetMail');
 		win.open();
             });
-            var menuItem = menu.add({ title : 'anteprime' });
+            var menuItem = menu.add({ title : 'anteprime', itemId: 2 });
             menuItem.addEventListener('click', function(e) {
                 // do something when the menu item is tapped
 		//open popup
@@ -89,9 +91,36 @@ neww.main_win = Titanium.UI.createWindow({
 		    'int');
 		win.open();
             });
-        }
+	    //gps handling
+	    var menuItem = menu.add({ title : 'start GPS', itemId: 3 });
+            menuItem.addEventListener('click', function(e) {
+		//add location handler if not present
+		gps.addHandler();
+	    });
+	    var menuItem = menu.add({ title : 'stop GPS', itemId: 4 });
+            menuItem.addEventListener('click', function(e) {
+		//remove location handler if present
+		gps.removeHandler();		
+	    });
+        },
+	onPrepareOptionsMenu: function(e){
+	    var menu = e.menu;
+	    menu.findItem(3).setVisible(!gps.locationAdded);
+	    menu.findItem(4).setVisible(gps.locationAdded);
+	}
     }
 });
+//toggle gps when app goes to background
+Ti.App.addEventListener('resume', function(e){
+    Ti.API.trace("LAV Warning resume"); 
+    gps.addHandler();
+});
+Ti.App.addEventListener('pause', function(e){
+    Ti.API.trace("LAV Warning pause");
+    gps.removeHandler();
+});
+
+
 //only landscape mode alowed
 if( Titanium.Platform.displayCaps.platformWidth <= 300 )
     neww.main_win.orientationModes = [Ti.UI.LANDSCAPE_LEFT];
@@ -136,13 +165,13 @@ neww.btn_take_pic = Titanium.UI.createButton({
     left: 300
     //font: {fontFamily:'Arial', fontSize: 16}
 });
-neww.btn_get_pos = Titanium.UI.createButton({
-    backgroundImage: '/images/gps.png',
-    width: 48, height: 48,
-    //title: "GPS",
-    left: 420
-    //font: {fontFamily:'Arial', fontSize: 16}
-});
+// neww.btn_get_pos = Titanium.UI.createButton({
+//     backgroundImage: '/images/gps.png',
+//     width: 48, height: 48,
+//     //title: "GPS",
+//     left: 420
+//     //font: {fontFamily:'Arial', fontSize: 16}
+// });
 neww.btn_send = Titanium.UI.createButton({
     backgroundImage: '/images/send.png',
     width: 48, height: 48,
@@ -153,7 +182,7 @@ neww.btn_send = Titanium.UI.createButton({
 
 //action buttons
 neww.top_buttons.add(neww.btn_help);
-neww.top_buttons.add(neww.btn_get_pos);
+//neww.top_buttons.add(neww.btn_get_pos);
 neww.top_buttons.add(neww.btn_load_pic);
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_send);
@@ -189,8 +218,8 @@ neww.btn_load_pic.addEventListener('click', function(){
     Ti.Media.openPhotoGallery({
 	mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO],
 	success: function(e){
-	    //e.media is the blob image
-	    gallery.add(neww.giter, e.media.nativePath);
+	    //e.media is the blob image, gps.get_position() gets the lastest available position from GPS
+	    gallery.add(neww.giter, e.media.nativePath, gps.get_position());
 	},
 	error: function(e){},
 	cancel: function(e){}
@@ -203,78 +232,26 @@ neww.btn_take_pic.addEventListener('click', function(){
     camera.show_camera(neww.giter);
 });
 
-neww.btn_get_pos.addEventListener('click', function(){
-
-    gps.get_position(); //start searching
-    
-    var onStreetFound = function(e){
-	//callback of reversegeocoder
-	//it will be called when the "human readable positions"
-	//are found
-	if( e.success ){
-	    Titanium.UI.createNotification({
-		duration: 2000,
-		message: "Verrà incluso anche l'indirizzo del luogo in cui ti trovi oltre alle coordinate GPS."
-	    }).show();
-	    //salvo gli indirizzi.
-	    neww.position.street = e.places;
-	}else
-	    Titanium.UI.createNotification({
-		duration: 2000,
-		message: "Non sono riuscito a risalire all'indirizzo in cui ti trovi.\nNon ti preoccupare comunque, nella segnalazione verranno inserite le coordinate GPS"
-	    }).show();	    
-    }
-
-
-    Ti.App.addEventListener('app:getCoords', function(e){
-	//invoked when the coords are obtained
-	neww.position.latitude = e.latitude;
-	neww.position.longitude = e.longitude;
-	gps.street_from_position(e, 
-				 onStreetFound);
-	    
-	Ti.UI.createNotification({
-	    duration: 2000,
-	    message: "Impostazione automatica della posizione tramite GPS riuscita",
-	}).show();
-	
-    });
-
-    
-});
-
 neww.btn_send.addEventListener('click', function(){
     var message;
-    var ok = true;
     var images = gallery.getImagePaths(neww.giter);
 
-    if( images.index == 0 && (neww.position.latitude == undefined || neww.position.latitude == null)){
-	message = "è necessaria almeno una foto o una posizione per inviare una segnalazione di maltrattamento.";
-	ok = false;
-    } else if (images.index == 0)
-	message = "Non hai scattato alcuna foto del maltrattamento! senza foto la segnalazione sarà molto meno efficace. Procedere senza foto?"
-    else if(neww.position.latitude == undefined || neww.position.latitude == null)
-	message = "La posizione non è stata ottenuta tramite GPS. Ricordarsi di inserire nella segnalazione la posizione dell'animale maltrattato!";
-    else {
-	// do not display anything 
-	send.showSendView(images, neww.position);
-	return;
-    }
-    // display a complaint message
-    var no_pos = Ti.UI.createAlertDialog({
-	title:'Attenzione',
-	message:message,
-	buttonNames: ['Indietro','Ok'], 
-	cancel: 0
-    });
-    
-    if( ok )
-	no_pos.addEventListener('click',function(e){
-	    if( e.index == 1 )
-		send.showSendView(images, neww.position);
+    if( images.index == 0 ){
+	message = "è necessaria almeno una foto per inviare una segnalazione di maltrattamento.";
+	// display a complaint message
+	var no_pos = Ti.UI.createAlertDialog({
+	    title:'Attenzione',
+	    message:message,
+	    buttonNames: ['Indietro'], 
+	    cancel: 0
 	});
-    
-    no_pos.show();
+
+	no_pos.show();
+    }else{
+	// do not display anything 
+	send.showSendView(images);
+    }
+        
 
 });
 
@@ -292,27 +269,17 @@ neww.changeButtonsPosition = function(){
     var phone_width = Titanium.Platform.displayCaps.platformWidth;
     var padding = 50;
     var button_half_width = 24;
-    var button_distance = (phone_width - padding*2) / 4;
+    var button_distance = (phone_width - padding*2) / 3;
     
     neww.btn_help.setLeft( padding - button_half_width ); 
     neww.btn_load_pic.setLeft( padding + button_distance - button_half_width ); 
     neww.btn_take_pic.setLeft( padding + (button_distance * 2) - button_half_width); 
-    neww.btn_get_pos.setLeft( padding + (button_distance * 3) - button_half_width); 
-    neww.btn_send.setLeft( padding + (button_distance * 4) - button_half_width); 
+    neww.btn_send.setLeft( padding + (button_distance * 3) - button_half_width); 
 }
 //change the position also onload
 neww.changeButtonsPosition();
 
-//open the interface
-neww.main_win.open();
-
-
-Ti.Gesture.addEventListener('orientationchange', function(e) {
-    Ti.API.trace(Ti.Gesture.orientation);
-    neww.changeButtonsPosition();
-    gallery.updateLayout(neww.giter);
-});
-
+//main window event handlers
 neww.main_win.addEventListener('postlayout', function(e){
     //debug
     Ti.API.trace("win "+neww.main_win.size.width+","+neww.main_win.size.height+" ");
@@ -320,4 +287,17 @@ neww.main_win.addEventListener('postlayout', function(e){
     Ti.API.trace("mainview "+neww.main_view.size.width+","+neww.main_view.size.height+" ");
     Ti.API.trace("welcome "+neww.welcome.size.width+","+neww.welcome.size.height+" ");
     Ti.API.trace("scrollview "+neww.giter.widget.size.width+","+neww.giter.widget.size.height+" ");
+});
+
+neww.main_win.addEventListener('open', function(e){
+    Ti.API.trace("LAV Warning open"); 
+    gps.addHandler();
+});
+//open the interface
+neww.main_win.open();
+
+Ti.Gesture.addEventListener('orientationchange', function(e) {
+    Ti.API.trace(Ti.Gesture.orientation);
+    neww.changeButtonsPosition();
+    gallery.updateLayout(neww.giter);
 });

@@ -82,17 +82,18 @@ gallery.remove = function(iterator, imagePath){
     var old_data = gallery._reset(iterator);
     //update
     for( ; i < old_data.index ; ++i ){
-	var gallerypath = old_data.paths[i];
+	var gallerypath = old_data.paths[i].path;
+	var gallerygps = old_data.paths[i].position;
 	//add it if it is not to be removed
 	if( imagePath != gallerypath )
-	    gallery.add(iterator, gallerypath);
+	    gallery.add(iterator, gallerypath, gallerygps);
 	Ti.API.trace("processed image '"+gallerypath+"''");
     }
     Ti.API.debug("gallery.remove: new Iterator: "+JSON.stringify( iterator.data ));
 }
 
 //eventually raises an app:galleryRebuilt signal if the user removes an image
-gallery.add = function(iterator, imagePath){
+gallery.add = function(iterator, imagePath, position){
     //add the image passed, in the position pointed by iterator,
     //in the view scroll
     var _img;
@@ -174,7 +175,7 @@ gallery.add = function(iterator, imagePath){
     iterator.rowPosition += iterator.image_size + iterator.padding;
     
     //save data
-    iterator.data.paths[iterator.data.index] = imagePath;
+    iterator.data.paths[iterator.data.index] = {'location':position, 'path':imagePath};
     iterator.data.index += 1;
 
     Ti.API.debug("gallery.add: Iterator: "+JSON.stringify( iterator.data ));
@@ -189,7 +190,7 @@ gallery.getImagePaths = function(iterator){
     //in the insertion order
     //it returns a dictionary
     //- index: the total number of items
-    //- paths: an array of nativePath (one for each picture)
+    //- paths: an array of dictionary {nativePath, position of image} (one for each picture)
     
     //return by value (not by reference)
     return JSON.parse( JSON.stringify( iterator.data ) );

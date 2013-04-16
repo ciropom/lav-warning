@@ -17,7 +17,7 @@ Titanium.include("gallery.js");
 
 var send = {};
 
-send.showSendView = function(images, position){
+send.showSendView = function(images){
     //show the send view
     
     //creates a comment view fully functional with all the callbacks 
@@ -40,29 +40,25 @@ send.showSendView = function(images, position){
     
     var txt = '';
     txt += "Per favore inserisci qui sotto i dettagli che ritieni utili su questa segnalazione:\n\n\n";
-    if(position.latitude !== undefined && position.latitude !== null){
-	txt += "Posizione stimata del maltrattamento: \n";
-	txt += "("+position.latitude+", "+position.longitude+") \n\n";
-	txt += "link: http://maps.google.com/maps?q="+position.latitude+",+"+position.longitude+"&iwloc=A&hl=it \n\n";
-	if( position.street != null ){ 
-	    txt += "Indirizzo stimato della segnalazione:\n";
-	    for( i=0; i<position.street.length ; ++i )
-		txt += position.street[i].address + "\n";
-	}
-	txt += "\n";
-    }
-
-    email.messageBody = txt;
 
     //add attachments
     Ti.API.trace("images "+JSON.stringify(images)+"");
     Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.index; i++){
-	var f = Ti.Filesystem.getFile(images.paths[i]);
+	var f = Ti.Filesystem.getFile(images.paths[i].path);
+	var imgname = Ti.Filesystem.getFile(images.paths[i].path).name;
 	email.addAttachment(f);
-	Ti.API.trace("aggiungo immagine "+images.paths[i]);
+	Ti.API.trace("aggiungo immagine "+images.paths[i].path);
+	if( images.paths[i].location.latitude != null && images.paths[i].location.longitude != null )
+	    txt += "Coordinate GPS immagine "+imgname+" : "+images.paths[i].location.latitude+","+images.paths[i].location.longitude+"\n";
+	
+	if( images.paths[i].location.street != null )
+	    txt += "Indirizzo GPS immagine "+imgname+" : "+images.paths[i].location.street+"\n";
+	
+	Ti.API.trace("aggiungo posizione "+images.paths[i].location);
     }
-
+    txt+= "\n";
+    email.messageBody = txt;
 
     //add listener
     email.addEventListener('complete', send.messageSendCompleted );

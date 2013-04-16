@@ -14,6 +14,7 @@
 /*   Author: Danilo Tomasoni <danilo.tomasoni@cryptolab.net> */
 
 Titanium.include("gallery.js");
+Titanium.include("gps.js");
 
 var camera = {};
 
@@ -23,7 +24,7 @@ camera.show_camera = function(iter){
 	success:function(event) {
 	    // called when media returned from the camera
 	    if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
-		iter = gallery.add(iter, event.media.nativePath);
+		iter = gallery.add(iter, event.media.nativePath, gps.get_position());
 	    } else {
 		alert("got the wrong type back ="+event.mediaType);
 	    }
