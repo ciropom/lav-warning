@@ -14,11 +14,17 @@ cp build/android/bin/app-unsigned.apk .
 unzip -o -d temp/ app-unsigned.apk
 
 #remove some things - you may want to remove other cruft
+#remove unused libraries
+rm -rf temp/lib/armeabi-v7a/libtiverify.so
+rm -rf temp/lib/armeabi/libtiverify.so
+rm -rf temp/lib/x86/libtiverify.so
+#remove devices support
 #rm -rf temp/lib/armeabi
 #rm -rf temp/lib/armeabi-v7a
 rm -rf temp/lib/x86
 #this is needed since 2.1.0
 #rm -rf temp/res/drawable/background.png
+rm -rf temp/org/appcelerator/titanium/res/drawable
 rm -rf temp/ti
 
 #zip it
