@@ -17,7 +17,8 @@ unzip -o -d temp/ app-unsigned.apk
 #rm -rf temp/lib/armeabi
 #rm -rf temp/lib/armeabi-v7a
 rm -rf temp/lib/x86
-rm -rf temp/res/drawable/background.png
+#this is needed since 2.1.0
+#rm -rf temp/res/drawable/background.png
 rm -rf temp/ti
 
 #zip it
