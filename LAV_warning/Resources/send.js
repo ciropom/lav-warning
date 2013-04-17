@@ -49,12 +49,20 @@ send.showSendView = function(images){
 	var imgname = Ti.Filesystem.getFile(images.paths[i].path).name;
 	email.addAttachment(f);
 	Ti.API.trace("aggiungo immagine "+images.paths[i].path);
-	if( images.paths[i].location.latitude != null && images.paths[i].location.longitude != null )
-	    txt += "Coordinate GPS immagine "+imgname+" : "+images.paths[i].location.latitude+","+images.paths[i].location.longitude+"\n";
+
+	if( images.paths[i].location != undefined && images.paths[i].location != null ){
+	    if( images.paths[i].location.latitude != null && images.paths[i].location.longitude != null )
+		txt += "Coordinate GPS immagine "+imgname+" : "+images.paths[i].location.latitude+","+images.paths[i].location.longitude+"\n";
 	
-	if( images.paths[i].location.street != null )
-	    txt += "Indirizzo GPS immagine "+imgname+" : "+images.paths[i].location.street+"\n";
-	
+	    if( images.paths[i].location.street != null ){
+		txt += "Indirizzo GPS immagine "+imgname+" :\n";
+		var j;
+		var streets = images.paths[i].location.street;
+		for(j=0; i<streets.length; i++)
+		    txt += streets[j]+"\n";
+	    }
+	}
+
 	Ti.API.trace("aggiungo posizione "+images.paths[i].location);
     }
     txt+= "\n";
