@@ -143,57 +143,35 @@ neww.top_buttons = Titanium.UI.createView({
 
 
 neww.btn_help = Titanium.UI.createButton({
-    //title: "Istruzioni",
     backgroundImage: '/images/help.png',
     width: 48, height: 48,
     left: 50
-    //font: {fontFamily:'Arial', fontSize: 16}
 });
 
 neww.btn_load_pic = Titanium.UI.createButton({
     backgroundImage: '/images/photo-load.png',
     width: 48, height: 48,
-    //title: "Foto",
     left: 180
-    //font: {fontFamily:'Arial', fontSize: 16}
 });
 
 neww.btn_take_pic = Titanium.UI.createButton({
     backgroundImage: '/images/photo.png',
     width: 48, height: 48,
-    //title: "Foto",
     left: 300
-    //font: {fontFamily:'Arial', fontSize: 16}
 });
-// neww.btn_get_pos = Titanium.UI.createButton({
-//     backgroundImage: '/images/gps.png',
-//     width: 48, height: 48,
-//     //title: "GPS",
-//     left: 420
-//     //font: {fontFamily:'Arial', fontSize: 16}
-// });
 neww.btn_send = Titanium.UI.createButton({
     backgroundImage: '/images/send.png',
     width: 48, height: 48,
-    //title: "Segnala!",
     right: 50
-    //font: {fontFamily:'Arial', fontSize: 16}
 });
 
 //action buttons
 neww.top_buttons.add(neww.btn_help);
-//neww.top_buttons.add(neww.btn_get_pos);
 neww.top_buttons.add(neww.btn_load_pic);
 neww.top_buttons.add(neww.btn_take_pic);
 neww.top_buttons.add(neww.btn_send);
 
 neww.giter = gallery.create();
-//listen for app:galleryRebuilt signal
-//Ti.App.addEventListener('app:galleryRebuilt', function(e){ 
-    //update the iterator
-//    neww.giter = e.new_iterator;
-//});
-
 
 neww.welcome = Ti.UI.createLabel({
   text: 'Foto che verranno incluse nella segnalazione:',
