@@ -59,7 +59,7 @@ send.showSendView = function(images){
 		var j;
 		var streets = images.paths[i].location.street;
 		for(j=0; i<streets.length; i++)
-		    txt += streets[j]+"\n";
+		    txt += streets[j].address+"\n";
 	    }
 	}
 
