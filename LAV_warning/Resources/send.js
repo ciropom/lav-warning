@@ -46,15 +46,16 @@ send.showSendView = function(images){
     Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.index; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i].path);
-	var imgname = Ti.Filesystem.getFile(images.paths[i].path).name;
-	email.addAttachment(f);
-	Ti.API.trace("aggiungo immagine "+images.paths[i].path);
-
+	var img = f.name;
+	if( f.exists() ){
+	    email.addAttachment(f);
+	    Ti.API.trace("aggiungo immagine "+images.paths[i].path);
+	}
 	if( images.paths[i].location != undefined && images.paths[i].location != null ){
 	    if( images.paths[i].location.latitude != null && images.paths[i].location.longitude != null )
 		txt += "Coordinate GPS immagine "+imgname+" : "+images.paths[i].location.latitude+","+images.paths[i].location.longitude+"\n";
 	
-	    if( images.paths[i].location.street != null ){
+	    if( images.paths[i].location.street != undefined && images.paths[i].location.street != null && images.paths[i].location.street.length != 0 ){
 		txt += "Indirizzo GPS immagine "+imgname+" :\n";
 		var j;
 		var streets = images.paths[i].location.street;
