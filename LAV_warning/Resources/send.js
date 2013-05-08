@@ -42,7 +42,7 @@ send.showSendView = function(images){
     txt += "Per favore inserisci qui sotto i dettagli che ritieni utili su questa segnalazione:\n\n\n";
 
     //add attachments
-    Ti.API.trace("images "+JSON.stringify(images)+"");
+    Ti.API.debug("images "+JSON.stringify(images)+"");
     Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.index; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i].path);
