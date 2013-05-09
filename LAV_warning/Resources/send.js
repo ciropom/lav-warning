@@ -46,7 +46,7 @@ send.showSendView = function(images){
     Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.index; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i].path);
-	var img = f.name;
+	var imgname = f.name;
 	if( f.exists() ){
 	    email.addAttachment(f);
 	    Ti.API.trace("aggiungo immagine "+images.paths[i].path);
