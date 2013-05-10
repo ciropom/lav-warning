@@ -19,6 +19,7 @@ Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;
 Titanium.Geolocation.distanceFilter = 4;
 
 var gps = {};
+gps._null_position = {'latitude':null, 'longitude':null, 'street':null};
 gps._last_position = {'latitude':null, 'longitude':null, 'street':null};
 
 //if andorid tune geolocation
@@ -36,8 +37,7 @@ if( Ti.Platform.osname == 'android' ){
 }
 
 
-    //returns 1 if geolocation is enabled, false otherwise
-
+//returns 1 if geolocation is enabled, false otherwise
 gps.locationAdded = false;
 gps.handleLocation = function(e) {
     if (e.success) {
@@ -107,6 +107,10 @@ gps._onStreetFound = function(e){
 	    Ti.API.trace("Street addresses not found");
 	    gps._last_position.street = null;
 	}
+}
+
+gps.get_null_position = function(){
+    return gps._null_position;
 }
 
 //get last position found
