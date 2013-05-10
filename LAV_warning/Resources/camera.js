@@ -26,7 +26,7 @@ camera.show_camera = function(iter){
 	    if(event.mediaType == Ti.Media.MEDIA_TYPE_PHOTO) {
 		iter = gallery.add(iter, event.media.nativePath, gps.get_position());
 	    } else {
-		alert("got the wrong type back ="+event.mediaType);
+		alert("Possono essere aggiunte solo foto e non ("+event.mediaType+") alla segnalazione");
 	    }
 	},
 	cancel:function() {
