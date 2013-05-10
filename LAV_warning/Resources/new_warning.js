@@ -196,8 +196,9 @@ neww.btn_load_pic.addEventListener('click', function(){
     Ti.Media.openPhotoGallery({
 	mediaTypes: [Ti.Media.MEDIA_TYPE_PHOTO],
 	success: function(e){
-	    //e.media is the blob image, gps.get_position() gets the lastest available position from GPS
-	    gallery.add(neww.giter, e.media.nativePath, gps.get_position());
+	    //e.media is the blob image, gps.get_null_position() says that we don't know where this picture
+	    //was taken
+	    gallery.add(neww.giter, e.media.nativePath, gps.get_null_position());
 	},
 	error: function(e){},
 	cancel: function(e){}
