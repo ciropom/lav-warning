@@ -44,7 +44,7 @@ send.showSendView = function(images){
     //add attachments
     Ti.API.debug("images "+JSON.stringify(images)+"");
     Ti.API.debug("invio di "+images.index+" immagini...");
-    for(var i = 0; i < images.index; i++){
+    for(var i = 0; i < images.paths.length; i++){
 	var f = Ti.Filesystem.getFile(images.paths[i].path);
 	var imgname = f.name;
 	if( f.exists() ){
