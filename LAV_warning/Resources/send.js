@@ -42,9 +42,9 @@ send.showSendView = function(images){
     txt += "Per favore inserisci qui sotto i dettagli che ritieni utili su questa segnalazione:\n\n\n";
 
     //add attachments
-    Ti.API.debug("images "+JSON.stringify(images)+"");
     Ti.API.debug("invio di "+images.index+" immagini...");
     for(var i = 0; i < images.paths.length; i++){
+	Ti.API.debug("Aggiunta immagine "+JSON.stringify(images.paths[i])+"");
 	var f = Ti.Filesystem.getFile(images.paths[i].path);
 	var imgname = f.name;
 	if( f.exists() ){
@@ -61,7 +61,6 @@ send.showSendView = function(images){
 		    for(j=0; i<streets.length; i++)
 			txt += streets[j].address+"\n";
 		}
-		Ti.API.trace("aggiungo posizione "+images.paths[i].location);
 	    }
 	}
     }
