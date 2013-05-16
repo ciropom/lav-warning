@@ -42,15 +42,9 @@ gps.locationAdded = false;
 gps.handleLocation = function(e) {
     if (e.success) {
         Ti.App.fireEvent("app:getCoords", e.coords );
-	//gps.removeHandler();
-	Ti.API.trace("fired app:getCoords"+e);
+	Ti.API.trace("fired app:getCoords("+JSON.stringify(e)+')');
     }else{
 	Ti.API.error("GPS error "+e.code+": "+e.error);
-	// var wait_dialog = Titanium.UI.createNotification({
-	//     duration: 2000,
-	//     message: "Errore GPS "+e.code+": "+e.error 
-	// });
-	// wait_dialog.show();
     }
 };
 gps.addHandler = function() {
