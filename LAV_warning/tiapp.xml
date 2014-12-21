@@ -7,7 +7,7 @@
         <target device="blackberry">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>3.1.3.GA</sdk-version>
+    <sdk-version>3.4.1.GA</sdk-version>
     <id>it.lav.warning</id>
     <name>LAV Warning</name>
     <version>2.1.2</version>
@@ -36,12 +36,18 @@
         </orientations>
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <tool-api-level>8</tool-api-level>
-        <manifest android:installLocation="auto" android:versionCode="6"
-                android:versionName="2.1.1">
-      		<uses-sdk android:minSdkVersion="7"/>
-		<supports-screens android:anyDensity="false"/>
-	</manifest>
+	<tool-api-level>16</tool-api-level>
+        <manifest android:installLocation="preferExternal"
+                android:versionCode="10" android:versionName="1.4.2">
+                <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
+                <application android:theme="@android:style/Theme.Holo">
+                    <activity
+                        android:configChanges="keyboardHidden|orientation"
+                        android:name="org.appcelerator.titanium.TiActivity"
+                        android:screenOrientation="portrait"
+                        android:theme="@android:style/Theme.Holo"/>
+                </application>
+        </manifest>
     </android>
     <modules/>
 </ti:app>
